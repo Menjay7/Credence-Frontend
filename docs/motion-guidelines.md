@@ -71,4 +71,7 @@ Use the shared skeleton animation token:
 ```tsx
 animation: 'var(--credence-motion-skeleton)'
 ```
+
 ```}{
+
+```

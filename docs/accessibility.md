@@ -8,11 +8,11 @@ Scope: All core flows — navigation, bonding, trust score
 
 ### 1. Color Contrast (WCAG 1.4.3)
 
-| Element | Before | After | Ratio |
-|---|---|---|---|
-| Link text on `#f8fafc` | `#0ea5e9` (3.0:1 ✗) | `#0284c7` (4.56:1 ✓) | AA pass |
-| Button background | `#0ea5e9` | `#0284c7` | AA pass |
-| Subtitle text `#64748b` on `#f8fafc` | 4.4:1 (borderline) | Kept — passes AA for normal text | AA pass |
+| Element                              | Before              | After                            | Ratio   |
+| ------------------------------------ | ------------------- | -------------------------------- | ------- |
+| Link text on `#f8fafc`               | `#0ea5e9` (3.0:1 ✗) | `#0284c7` (4.56:1 ✓)             | AA pass |
+| Button background                    | `#0ea5e9`           | `#0284c7`                        | AA pass |
+| Subtitle text `#64748b` on `#f8fafc` | 4.4:1 (borderline)  | Kept — passes AA for normal text | AA pass |
 
 ### 2. Focus Visibility (WCAG 2.4.7)
 
@@ -107,21 +107,25 @@ Use this checklist when building new components or pages.
 ## Form Field Accessibility Patterns
 
 ### Labels
+
 - Every input must have a visible `<label>` element linked via `htmlFor` and `id`.
 - Do not use placeholder text as a substitute for labels — placeholders disappear on focus.
 - Labels should clearly describe the expected input (e.g. "Bond Amount" not "Amount").
 
 ### Hint / Helper Text
+
 - Use helper text below the input to clarify format or requirements (e.g. "Enter amount in USD").
 - Link hint text to the input using `aria-describedby` so screen readers announce it.
 
 ### Error / Inline Validation
+
 - Errors must never rely on color alone — always include an icon (⚠) and descriptive text.
 - Add `aria-invalid="true"` to the input when an error is present.
 - Use `role="alert"` on the error message so screen readers announce it immediately.
 - Error messages should be specific (e.g. "Amount must be greater than 0" not "Invalid input").
 
 ### Manual Screen Reader Test Steps (VoiceOver)
+
 1. Enable VoiceOver (iOS: Settings → Accessibility → VoiceOver).
 2. Navigate to the bond form using swipe gestures.
 3. Confirm each label is announced when focusing its input.
@@ -159,7 +163,9 @@ Use this checklist when building new components or pages.
 
 ```css
 /* Bad — removes focus indicator */
-*:focus { outline: none; }
+*:focus {
+  outline: none;
+}
 
 /* Good — visible, custom focus */
 :focus-visible {
@@ -179,6 +185,3 @@ Use this checklist when building new components or pages.
 
 // Best — use <button> + navigation for true actions
 ```
-
-
-

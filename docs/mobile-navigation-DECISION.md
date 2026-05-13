@@ -15,6 +15,7 @@ After comprehensive IA analysis of Credence-Frontend (4 pages, flat hierarchy, w
 - **Tablet/Desktop (≥ 640px):** Horizontal header navigation (current pattern)
 
 This decision optimizes for:
+
 1. **Mobile usability** (thumb-friendly, accessible)
 2. **Desktop familiarity** (preserve working pattern)
 3. **Accessibility compliance** (WCAG 2.1 AA)
@@ -24,21 +25,22 @@ This decision optimizes for:
 
 ## 📊 DECISION MATRIX
 
-| Criterion | Hamburger Only | Bottom Tab Bar | Hybrid (Selected) | Horizontal Only |
-|-----------|----------------|----------------|-------------------|-----------------|
-| **Mobile Usability** | ✅ Good | ✅ Excellent | ✅ Excellent | ❌ Poor |
-| **Desktop Usability** | ⚠️ Unnecessary | ❌ Awkward | ✅ Excellent | ✅ Excellent |
-| **Discoverability** | ⚠️ Hidden | ✅ Always visible | ✅ Contextual | ✅ Always visible |
-| **Screen Count (3 pages)** | ✅ Scales well | ✅ Perfect fit | ✅ Perfect fit | ✅ Works |
-| **Thumb Reachability** | ⚠️ Top-left | ✅ Bottom (ideal) | ✅ Top-left mobile | ❌ Top (hard) |
-| **Web Conventions** | ✅ Standard | ⚠️ Uncommon | ✅ Standard | ✅ Standard |
-| **Accessibility** | ✅ WCAG compliant | ✅ WCAG compliant | ✅ WCAG compliant | ⚠️ Mobile issues |
-| **Implementation Effort** | 🟡 Medium | 🟡 Medium | 🟠 Medium-High | 🟢 Low (current) |
-| **Maintenance** | 🟢 Single pattern | 🟢 Single pattern | 🟡 Two patterns | 🟢 Single pattern |
-| **Gesture Conflicts** | ⚠️ Swipe-back | ✅ None | ⚠️ Swipe-back | ✅ None |
-| **Future Scalability** | ✅ 10+ pages | ⚠️ Max 5 pages | ✅ 10+ pages | ⚠️ 5-7 pages |
+| Criterion                  | Hamburger Only    | Bottom Tab Bar    | Hybrid (Selected)  | Horizontal Only   |
+| -------------------------- | ----------------- | ----------------- | ------------------ | ----------------- |
+| **Mobile Usability**       | ✅ Good           | ✅ Excellent      | ✅ Excellent       | ❌ Poor           |
+| **Desktop Usability**      | ⚠️ Unnecessary    | ❌ Awkward        | ✅ Excellent       | ✅ Excellent      |
+| **Discoverability**        | ⚠️ Hidden         | ✅ Always visible | ✅ Contextual      | ✅ Always visible |
+| **Screen Count (3 pages)** | ✅ Scales well    | ✅ Perfect fit    | ✅ Perfect fit     | ✅ Works          |
+| **Thumb Reachability**     | ⚠️ Top-left       | ✅ Bottom (ideal) | ✅ Top-left mobile | ❌ Top (hard)     |
+| **Web Conventions**        | ✅ Standard       | ⚠️ Uncommon       | ✅ Standard        | ✅ Standard       |
+| **Accessibility**          | ✅ WCAG compliant | ✅ WCAG compliant | ✅ WCAG compliant  | ⚠️ Mobile issues  |
+| **Implementation Effort**  | 🟡 Medium         | 🟡 Medium         | 🟠 Medium-High     | 🟢 Low (current)  |
+| **Maintenance**            | 🟢 Single pattern | 🟢 Single pattern | 🟡 Two patterns    | 🟢 Single pattern |
+| **Gesture Conflicts**      | ⚠️ Swipe-back     | ✅ None           | ⚠️ Swipe-back      | ✅ None           |
+| **Future Scalability**     | ✅ 10+ pages      | ⚠️ Max 5 pages    | ✅ 10+ pages       | ⚠️ 5-7 pages      |
 
 ### Scoring Summary
+
 - **Hamburger Only:** 7/11 ✅ (good mobile, awkward desktop)
 - **Bottom Tab Bar:** 8/11 ✅ (excellent mobile, uncommon on web)
 - **Hybrid (Selected):** 10/11 ✅✅ (best of both worlds)
@@ -51,6 +53,7 @@ This decision optimizes for:
 ### Pattern Definition
 
 #### Mobile Navigation (< 640px)
+
 ```
 ┌─────────────────────────┐
 │ ☰  Credence      [Theme]│ ← Hamburger trigger
@@ -74,6 +77,7 @@ Drawer (when open):
 ```
 
 #### Desktop Navigation (≥ 640px)
+
 ```
 ┌─────────────────────────────────────────────┐
 │ Credence    Home    Bond    Trust    [Theme]│ ← Horizontal (current)
@@ -87,6 +91,7 @@ Drawer (when open):
 ### Mobile Drawer Component
 
 #### Visual Design
+
 ```css
 Drawer Container:
 - Width: 280px (max 70vw)
@@ -109,6 +114,7 @@ Animation:
 ```
 
 #### Navigation Links
+
 ```css
 Link Item:
 - Padding: 12px 16px
@@ -125,6 +131,7 @@ States:
 ```
 
 #### Hamburger Icon
+
 ```css
 Button:
 - Size: 44×44px (touch target)
@@ -151,6 +158,7 @@ Current horizontal navigation in header works well for tablet/desktop. No change
 ### ARIA Attributes
 
 #### Hamburger Button
+
 ```tsx
 <button
   aria-label="Open navigation menu"
@@ -163,35 +171,29 @@ Current horizontal navigation in header works well for tablet/desktop. No change
 ```
 
 #### Drawer Container
+
 ```tsx
-<nav
-  id="mobile-nav-drawer"
-  aria-label="Mobile navigation"
-  role="navigation"
-  hidden={!isOpen}
->
+<nav id="mobile-nav-drawer" aria-label="Mobile navigation" role="navigation" hidden={!isOpen}>
   {/* Navigation links */}
 </nav>
 ```
 
 #### Close Button
+
 ```tsx
-<button
-  aria-label="Close navigation menu"
-  onClick={closeDrawer}
->
+<button aria-label="Close navigation menu" onClick={closeDrawer}>
   ✕
 </button>
 ```
 
 ### Keyboard Support
 
-| Key | Action |
-|-----|--------|
-| **Tab** | Move focus through drawer items |
-| **Shift+Tab** | Move focus backward |
-| **Enter/Space** | Activate focused link/button |
-| **Escape** | Close drawer, return focus to hamburger |
+| Key             | Action                                  |
+| --------------- | --------------------------------------- |
+| **Tab**         | Move focus through drawer items         |
+| **Shift+Tab**   | Move focus backward                     |
+| **Enter/Space** | Activate focused link/button            |
+| **Escape**      | Close drawer, return focus to hamburger |
 
 ### Focus Management
 
@@ -270,14 +272,22 @@ User closes drawer:
 ```css
 /* Mobile: Hamburger drawer */
 @media (max-width: 639px) {
-  .desktop-nav { display: none; }
-  .mobile-nav { display: block; }
+  .desktop-nav {
+    display: none;
+  }
+  .mobile-nav {
+    display: block;
+  }
 }
 
 /* Tablet/Desktop: Horizontal nav */
 @media (min-width: 640px) {
-  .mobile-nav { display: none; }
-  .desktop-nav { display: flex; }
+  .mobile-nav {
+    display: none;
+  }
+  .desktop-nav {
+    display: flex;
+  }
 }
 ```
 
@@ -298,6 +308,7 @@ src/components/navigation/
 ### Code Structure
 
 #### 1. Navigation Links Data
+
 ```tsx
 // src/components/navigation/NavigationLinks.tsx
 export const navigationLinks = [
@@ -308,6 +319,7 @@ export const navigationLinks = [
 ```
 
 #### 2. Media Query Hook
+
 ```tsx
 // src/components/navigation/useMediaQuery.ts
 import { useState, useEffect } from 'react'
@@ -329,6 +341,7 @@ export function useMediaQuery(query: string): boolean {
 ```
 
 #### 3. Mobile Navigation Component
+
 ```tsx
 // src/components/navigation/MobileNav.tsx
 import { useState, useEffect, useRef } from 'react'
@@ -373,7 +386,9 @@ export default function MobileNav() {
     } else {
       document.body.style.overflow = ''
     }
-    return () => { document.body.style.overflow = '' }
+    return () => {
+      document.body.style.overflow = ''
+    }
   }, [isOpen])
 
   return (
@@ -392,11 +407,7 @@ export default function MobileNav() {
 
       {/* Backdrop */}
       {isOpen && (
-        <div
-          className="mobile-nav-backdrop"
-          onClick={() => setIsOpen(false)}
-          aria-hidden="true"
-        />
+        <div className="mobile-nav-backdrop" onClick={() => setIsOpen(false)} aria-hidden="true" />
       )}
 
       {/* Drawer */}
@@ -441,6 +452,7 @@ export default function MobileNav() {
 ```
 
 #### 4. Desktop Navigation Component
+
 ```tsx
 // src/components/navigation/DesktopNav.tsx
 import { Link, useLocation } from 'react-router-dom'
@@ -468,6 +480,7 @@ export default function DesktopNav() {
 ```
 
 #### 5. Updated Layout Component
+
 ```tsx
 // src/components/Layout.tsx
 import { Outlet, Link } from 'react-router-dom'
@@ -495,9 +508,7 @@ export default function Layout() {
       <main id="main-content" className="app-main">
         <Outlet />
       </main>
-      <footer className="app-footer">
-        {/* Footer content */}
-      </footer>
+      <footer className="app-footer">{/* Footer content */}</footer>
     </div>
   )
 }
@@ -508,6 +519,7 @@ export default function Layout() {
 ## 🎨 CSS IMPLEMENTATION
 
 ### Mobile Navigation Styles
+
 ```css
 /* src/components/navigation/MobileNav.css */
 
@@ -550,8 +562,12 @@ export default function Layout() {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Drawer */
@@ -661,6 +677,7 @@ export default function Layout() {
 ```
 
 ### Desktop Navigation Styles
+
 ```css
 /* src/components/navigation/DesktopNav.css */
 
@@ -706,6 +723,7 @@ export default function Layout() {
 ## ✅ VALIDATION CHECKLIST
 
 ### Functional Requirements
+
 - [ ] Hamburger button opens drawer on mobile
 - [ ] Drawer slides in from left with animation
 - [ ] Backdrop closes drawer when clicked
@@ -717,6 +735,7 @@ export default function Layout() {
 - [ ] Mobile nav shows on mobile (< 640px)
 
 ### Accessibility Requirements
+
 - [ ] Hamburger has `aria-label` and `aria-expanded`
 - [ ] Drawer has `id` and `aria-label`
 - [ ] Close button has `aria-label`
@@ -729,6 +748,7 @@ export default function Layout() {
 - [ ] All touch targets ≥ 44×44px
 
 ### Visual Requirements
+
 - [ ] Drawer width 280px (max 70vw)
 - [ ] Backdrop opacity 0.5
 - [ ] Animation duration 300ms
@@ -739,6 +759,7 @@ export default function Layout() {
 - [ ] Icons render correctly
 
 ### Cross-Browser Testing
+
 - [ ] iOS Safari (iPhone 12, 14, 15 Pro)
 - [ ] Android Chrome (Pixel, Samsung)
 - [ ] Desktop Chrome (resize to mobile)
@@ -746,6 +767,7 @@ export default function Layout() {
 - [ ] Desktop Safari (resize to mobile)
 
 ### Performance
+
 - [ ] No layout shift on load
 - [ ] Smooth animation (60fps)
 - [ ] No scroll jank
@@ -756,6 +778,7 @@ export default function Layout() {
 ## 🚀 MIGRATION PLAN
 
 ### Phase 1: Development (Day 1-2)
+
 1. Create navigation components
 2. Add media query hook
 3. Update Layout component
@@ -763,24 +786,28 @@ export default function Layout() {
 5. Test locally
 
 ### Phase 2: Testing (Day 2-3)
+
 1. Manual testing on real devices
 2. Accessibility audit (VoiceOver, TalkBack)
 3. Cross-browser testing
 4. Performance profiling
 
 ### Phase 3: Documentation (Day 3)
+
 1. Update Figma designs
 2. Document component API
 3. Add usage examples
 4. Update accessibility.md
 
 ### Phase 4: Deployment (Day 4)
+
 1. Deploy to staging
 2. QA review
 3. Deploy to production
 4. Monitor analytics
 
 ### Rollback Plan
+
 - If critical issues detected, revert Layout.tsx to previous version
 - Desktop navigation unchanged (zero risk)
 - Mobile users see desktop nav (degraded but functional)
@@ -790,12 +817,14 @@ export default function Layout() {
 ## 📊 SUCCESS METRICS
 
 ### Quantitative
+
 - **Navigation usage:** 80%+ mobile users successfully navigate
 - **Time to navigate:** < 2 seconds from hamburger tap to page load
 - **Error rate:** < 1% (drawer fails to open/close)
 - **Accessibility score:** 100% WCAG 2.1 AA compliance
 
 ### Qualitative
+
 - User feedback survey (2 weeks post-launch)
 - Accessibility audit report
 - Cross-browser compatibility report

@@ -64,9 +64,7 @@ export default function Button({
           </svg>
         </span>
       )}
-      <span className={isLoading ? 'credence-button__content--loading' : ''}>
-        {children}
-      </span>
+      <span className={isLoading ? 'credence-button__content--loading' : ''}>{children}</span>
     </button>
   )
 }

@@ -18,6 +18,7 @@
 ### Mobile Navigation (< 640px)
 
 #### Closed State
+
 ```
 ┌─────────────────────────────────────┐
 │ ☰  Credence                  [🌙]  │ ← Header
@@ -33,6 +34,7 @@
 ```
 
 #### Open State (Drawer)
+
 ```
 ┌─────────────────┐─────────────────────┐
 │ ✕ Menu          │ Credence      [🌙] │ ← Header
@@ -49,6 +51,7 @@
 ```
 
 **Interaction:**
+
 1. User taps ☰ → Drawer slides in from left (300ms)
 2. Backdrop appears (semi-transparent)
 3. Focus moves to ✕ close button
@@ -76,6 +79,7 @@
 ```
 
 **Interaction:**
+
 - User clicks link → Navigate
 - Active page highlighted (bold, primary color)
 - Hover states on links
@@ -87,6 +91,7 @@
 ### BEFORE (Current — Broken on Mobile)
 
 #### Mobile (< 640px) — PROBLEM
+
 ```
 ┌─────────────────────────────────────┐
 │ Credence  Bond  Trust Score  [🌙]  │ ← Links wrap awkwardly
@@ -99,12 +104,14 @@
 ```
 
 **Issues:**
+
 - ❌ Links too close together (< 44px touch targets)
 - ❌ Text wraps or overflows
 - ❌ Hard to reach at top of screen
 - ❌ No mobile-optimized pattern
 
 #### Desktop (≥ 640px) — WORKS WELL
+
 ```
 ┌───────────────────────────────────────────────────────────┐
 │ Credence    Home    Bond    Trust Score            [🌙]  │
@@ -120,6 +127,7 @@
 ### AFTER (Proposed — Optimized)
 
 #### Mobile (< 640px) — FIXED
+
 ```
 Closed:
 ┌─────────────────────────────────────┐
@@ -139,12 +147,14 @@ Open:
 ```
 
 **Improvements:**
+
 - ✅ 44×44px touch targets (WCAG compliant)
 - ✅ Thumb-friendly drawer
 - ✅ Clear visual hierarchy
 - ✅ Familiar pattern (universal)
 
 #### Desktop (≥ 640px) — UNCHANGED
+
 ```
 ┌───────────────────────────────────────────────────────────┐
 │ Credence    Home    Bond    Trust Score            [🌙]  │

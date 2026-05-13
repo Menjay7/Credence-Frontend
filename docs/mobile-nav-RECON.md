@@ -23,6 +23,7 @@
 ## 📊 SCREEN INVENTORY
 
 ### Primary Pages (4 total)
+
 ```
 ├── Home (/)                    — Landing, overview, CTAs
 ├── Bond (/bond)                — Create bond, view active bonds
@@ -31,6 +32,7 @@
 ```
 
 ### Current Navigation Structure
+
 ```
 App (BrowserRouter)
 └── Layout (header + footer wrapper)
@@ -51,19 +53,23 @@ App (BrowserRouter)
 ## 🎯 INFORMATION ARCHITECTURE ANALYSIS
 
 ### Primary Tasks (80% Usage — Estimated)
+
 1. **Home** — Entry point, understand product, navigate to features
 2. **Bond** — Create bond, view active bonds (core transaction)
 3. **Trust Score** — Lookup identity, view reputation activity
 
 ### Secondary Tasks (15% Usage)
+
 - Theme toggle (dark/light mode)
 - Footer links (docs, terms, privacy)
 
 ### Tertiary Tasks (5% Usage)
+
 - Toast notifications (system feedback)
 - Dev/test pages
 
 ### User Flow Patterns
+
 ```
 Home → Bond (create) → Success toast → View active bonds
 Home → Trust Score (lookup) → View activity
@@ -78,6 +84,7 @@ Any page → Theme toggle → Persist preference
 ## 📱 CURRENT MOBILE EXPERIENCE (PROBLEMS)
 
 ### Desktop Navigation (Current)
+
 ```
 ┌─────────────────────────────────────────────┐
 │ Credence    Bond    Trust Score    [Theme]  │ ← Header (horizontal)
@@ -85,6 +92,7 @@ Any page → Theme toggle → Persist preference
 ```
 
 ### Mobile Issues (< 640px)
+
 1. **Horizontal nav wraps awkwardly** — no responsive breakpoint handling
 2. **Small touch targets** — links too close together
 3. **No mobile-optimized pattern** — desktop nav shrinks, doesn't adapt
@@ -95,6 +103,7 @@ Any page → Theme toggle → Persist preference
 ## 🏗️ PLATFORM & TECHNICAL CONTEXT
 
 ### Dependencies
+
 ```json
 {
   "react": "^18.2.0",
@@ -104,6 +113,7 @@ Any page → Theme toggle → Persist preference
 ```
 
 ### Design System Status
+
 - ✅ CSS custom properties (design tokens)
 - ✅ Responsive breakpoints documented (mobile < 640px, tablet 640-1024px, desktop > 1024px)
 - ✅ Accessibility foundation (WCAG 2.1 AA compliant)
@@ -112,6 +122,7 @@ Any page → Theme toggle → Persist preference
 - ❌ No gesture support library
 
 ### Browser Targets
+
 - iOS Safari 15+ (iPhone)
 - Android Chrome 90+ (Android phones)
 - Responsive web (not native app)
@@ -121,12 +132,14 @@ Any page → Theme toggle → Persist preference
 ## 📐 DESIGN SYSTEM CONSTRAINTS
 
 ### Existing Patterns (from docs/FIGMA_DESIGN_SPECS.md)
+
 - **Color System:** Established (primary #0284c7, backgrounds, borders)
 - **Spacing:** CSS custom properties (`--space-6`, `--container-padding`)
 - **Typography:** 14-18px range, 600 weight for emphasis
 - **Accessibility:** Focus visible, ARIA labels, semantic HTML
 
 ### Responsive Breakpoints
+
 ```css
 Mobile:   < 640px   (1 column, compact spacing)
 Tablet:   640-1024px (2 columns)
@@ -138,6 +151,7 @@ Desktop:  > 1024px  (3+ columns, full header)
 ## 🎨 NAVIGATION PATTERN OPTIONS (WEB)
 
 ### Option A: Hamburger Menu (Drawer)
+
 ```
 Mobile:
 ┌─────────────────────────┐
@@ -157,11 +171,13 @@ Drawer (overlay):
 ```
 
 **Pros:**
+
 - ✅ Familiar pattern (universal)
 - ✅ Scales to many items
 - ✅ Clean header (minimal clutter)
 
 **Cons:**
+
 - ❌ Hidden navigation (discoverability issue)
 - ❌ Extra tap to access (2 taps vs 1)
 - ❌ Drawer conflicts with swipe-back gestures
@@ -169,6 +185,7 @@ Drawer (overlay):
 ---
 
 ### Option B: Bottom Tab Bar (Mobile Web)
+
 ```
 Mobile:
 ┌─────────────────────────┐
@@ -183,12 +200,14 @@ Mobile:
 ```
 
 **Pros:**
+
 - ✅ Always visible (high discoverability)
 - ✅ One-tap access (thumb-friendly)
 - ✅ Mimics native app patterns (familiar)
 - ✅ No gesture conflicts
 
 **Cons:**
+
 - ⚠️ Limited to 3-5 items (we have 3 ✓)
 - ⚠️ Takes vertical space (acceptable for 3 items)
 - ⚠️ Less common on web (but growing trend)
@@ -196,6 +215,7 @@ Mobile:
 ---
 
 ### Option C: Hybrid (Responsive)
+
 ```
 Mobile (< 640px):
 ┌─────────────────────────┐
@@ -209,11 +229,13 @@ Tablet/Desktop (≥ 640px):
 ```
 
 **Pros:**
+
 - ✅ Best of both worlds (responsive)
 - ✅ Familiar desktop pattern preserved
 - ✅ Mobile-optimized drawer
 
 **Cons:**
+
 - ⚠️ Two patterns to maintain
 - ⚠️ Drawer still has discoverability issue on mobile
 
@@ -222,6 +244,7 @@ Tablet/Desktop (≥ 640px):
 ## 🏆 OFFICIAL DECISION: HYBRID RESPONSIVE PATTERN
 
 **Rationale:**
+
 1. **Small screen count (3 primary pages)** — manageable in drawer or tabs
 2. **Flat IA (no deep nesting)** — no need for complex navigation
 3. **Desktop pattern works well** — preserve for tablet/desktop
@@ -229,6 +252,7 @@ Tablet/Desktop (≥ 640px):
 5. **Accessibility compliance** — both patterns support keyboard/screen readers
 
 **Selected Pattern:**
+
 - **Mobile (< 640px):** Hamburger menu (slide-in drawer)
 - **Tablet/Desktop (≥ 640px):** Horizontal header navigation (current)
 
@@ -237,6 +261,7 @@ Tablet/Desktop (≥ 640px):
 ## 📋 IMPLEMENTATION REQUIREMENTS
 
 ### Mobile Hamburger Menu (< 640px)
+
 - **Trigger:** ☰ icon (top-left, 44×44px touch target)
 - **Drawer:** Slide-in from left, 280px width, overlay with backdrop
 - **Animation:** 300ms ease-in-out
@@ -245,10 +270,12 @@ Tablet/Desktop (≥ 640px):
 - **Accessibility:** `aria-expanded`, `aria-controls`, focus management
 
 ### Desktop Navigation (≥ 640px)
+
 - **Current pattern:** Horizontal links in header
 - **No changes needed** — already works well
 
 ### Shared Requirements
+
 - **Active state:** Highlight current page
 - **Theme toggle:** Accessible from both patterns
 - **Keyboard navigation:** Tab, Enter, Escape support
@@ -259,6 +286,7 @@ Tablet/Desktop (≥ 640px):
 ## 🎨 VISUAL SPECIFICATIONS
 
 ### Mobile Drawer
+
 ```
 Width: 280px (70% viewport max)
 Background: var(--bg-card)
@@ -273,6 +301,7 @@ Z-index: 999
 ```
 
 ### Hamburger Icon
+
 ```
 Size: 24×24px icon, 44×44px touch target
 Color: var(--text-primary)
@@ -282,6 +311,7 @@ Active: scale 0.95
 ```
 
 ### Navigation Links (Drawer)
+
 ```
 Font-size: 16px
 Font-weight: 600
@@ -296,6 +326,7 @@ Active: background var(--color-primary), color white
 ## ✅ IMPLEMENTATION CHECKLIST
 
 ### Phase 1: Component Development
+
 - [ ] Create `MobileNav.tsx` component (hamburger + drawer)
 - [ ] Create `useMediaQuery` hook (detect breakpoint)
 - [ ] Update `Layout.tsx` to conditionally render mobile/desktop nav
@@ -303,18 +334,21 @@ Active: background var(--color-primary), color white
 - [ ] Implement focus trap for drawer
 
 ### Phase 2: Styling
+
 - [ ] Add mobile nav CSS (drawer, backdrop, animations)
 - [ ] Add responsive breakpoint media queries
 - [ ] Test dark mode compatibility
 - [ ] Verify touch target sizes (44×44px minimum)
 
 ### Phase 3: Accessibility
+
 - [ ] Add ARIA attributes (`aria-expanded`, `aria-controls`, `aria-label`)
 - [ ] Implement keyboard support (Tab, Enter, Escape)
 - [ ] Test with VoiceOver (iOS) and TalkBack (Android)
 - [ ] Verify focus management (trap, restore)
 
 ### Phase 4: Testing
+
 - [ ] Test on iOS Safari (iPhone 12, 14, 15 Pro)
 - [ ] Test on Android Chrome (Pixel, Samsung)
 - [ ] Test responsive breakpoints (resize browser)
@@ -322,6 +356,7 @@ Active: background var(--color-primary), color white
 - [ ] Verify no layout shift or flicker
 
 ### Phase 5: Documentation
+
 - [ ] Update Figma with mobile nav designs
 - [ ] Document component API and props
 - [ ] Add usage examples to docs
@@ -332,10 +367,12 @@ Active: background var(--color-primary), color white
 ## 📸 SCREENSHOTS REQUIRED (Before/After)
 
 ### Before (Current)
+
 1. Desktop navigation (works well)
 2. Mobile navigation (broken/awkward)
 
 ### After (Proposed)
+
 1. Mobile hamburger menu (closed state)
 2. Mobile drawer (open state)
 3. Desktop navigation (unchanged)
@@ -346,6 +383,7 @@ Active: background var(--color-primary), color white
 ## 🚀 MIGRATION PLAN
 
 ### Zero Regression Strategy
+
 1. **Feature flag:** Implement behind `ENABLE_MOBILE_NAV` flag
 2. **A/B test:** 50% mobile users see new nav (1 week)
 3. **Monitor:** Track navigation usage, error rates
@@ -353,6 +391,7 @@ Active: background var(--color-primary), color white
 5. **Fallback:** Revert flag if issues detected
 
 ### Rollback Plan
+
 - Feature flag can disable mobile nav instantly
 - Desktop nav unchanged (no risk)
 - No database migrations or API changes
@@ -362,11 +401,13 @@ Active: background var(--color-primary), color white
 ## 📊 SUCCESS METRICS
 
 ### Quantitative
+
 - Mobile navigation usage rate (target: 80%+ users navigate successfully)
 - Time to navigate (target: < 2 seconds)
 - Error rate (target: < 1%)
 
 ### Qualitative
+
 - User feedback (survey after 2 weeks)
 - Accessibility audit (WCAG 2.1 AA compliance)
 - Cross-browser compatibility (iOS Safari, Android Chrome)

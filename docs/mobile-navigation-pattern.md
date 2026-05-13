@@ -24,6 +24,7 @@
 ### What is this pattern?
 
 A responsive navigation system that adapts to screen size:
+
 - **Mobile (< 640px):** Hamburger menu with slide-in drawer
 - **Desktop (≥ 640px):** Horizontal navigation in header
 
@@ -64,6 +65,7 @@ Drawer (overlay):
 ```
 
 **Behavior:**
+
 - Hamburger button (☰) in top-left corner
 - Drawer slides in from left (280px width)
 - Backdrop overlay (semi-transparent)
@@ -78,6 +80,7 @@ Drawer (overlay):
 ```
 
 **Behavior:**
+
 - Horizontal links in header (current pattern)
 - Active page highlighted
 - Hover states on links
@@ -155,17 +158,17 @@ export function useMediaQuery(query: string): boolean {
 
   useEffect(() => {
     const media = window.matchMedia(query)
-    
+
     // Update state if initial value was wrong
     if (media.matches !== matches) {
       setMatches(media.matches)
     }
 
     const listener = (e: MediaQueryListEvent) => setMatches(e.matches)
-    
+
     // Modern browsers
     media.addEventListener('change', listener)
-    
+
     return () => media.removeEventListener('change', listener)
   }, [query, matches])
 
@@ -174,6 +177,7 @@ export function useMediaQuery(query: string): boolean {
 ```
 
 **Usage:**
+
 ```tsx
 const isMobile = useMediaQuery('(max-width: 639px)')
 ```
@@ -253,13 +257,7 @@ export default function MobileNav() {
       </button>
 
       {/* Backdrop */}
-      {isOpen && (
-        <div
-          className="mobile-nav-backdrop"
-          onClick={closeDrawer}
-          aria-hidden="true"
-        />
-      )}
+      {isOpen && <div className="mobile-nav-backdrop" onClick={closeDrawer} aria-hidden="true" />}
 
       {/* Drawer */}
       <nav
@@ -305,6 +303,7 @@ export default function MobileNav() {
 ```
 
 **Key Features:**
+
 - ✅ Focus management (moves to close button, returns to hamburger)
 - ✅ Keyboard support (Escape closes drawer)
 - ✅ Body scroll lock (prevents background scrolling)
@@ -566,7 +565,15 @@ export default function Layout() {
   const isMobile = useMediaQuery('(max-width: 639px)')
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--bg-page)', color: 'var(--text-primary)' }}>
+    <div
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        background: 'var(--bg-page)',
+        color: 'var(--text-primary)',
+      }}
+    >
       <a className="skip-link" href="#main-content">
         Skip to main content
       </a>
@@ -581,7 +588,15 @@ export default function Layout() {
         }}
       >
         {isMobile && <MobileNav />}
-        <Link to="/" style={{ fontWeight: 700, fontSize: '1.25rem', color: 'var(--text-primary)', textDecoration: 'none' }}>
+        <Link
+          to="/"
+          style={{
+            fontWeight: 700,
+            fontSize: '1.25rem',
+            color: 'var(--text-primary)',
+            textDecoration: 'none',
+          }}
+        >
           Credence
         </Link>
         {!isMobile && <DesktopNav />}
@@ -603,13 +618,21 @@ export default function Layout() {
       <footer className="app-footer">
         <div className="container footer-content">
           <div>
-            <p style={{ fontWeight: 600, color: 'var(--slate-900)', marginBottom: '0.25rem' }}>Credence</p>
+            <p style={{ fontWeight: 600, color: 'var(--slate-900)', marginBottom: '0.25rem' }}>
+              Credence
+            </p>
             <p>© 2026 Credence Protocol. Built on Stellar.</p>
           </div>
           <div className="footer-links">
-            <a href="#" className="footer-link">Documentation</a>
-            <a href="#" className="footer-link">Terms of Service</a>
-            <a href="#" className="footer-link">Privacy Policy</a>
+            <a href="#" className="footer-link">
+              Documentation
+            </a>
+            <a href="#" className="footer-link">
+              Terms of Service
+            </a>
+            <a href="#" className="footer-link">
+              Privacy Policy
+            </a>
           </div>
         </div>
       </footer>
@@ -625,18 +648,21 @@ export default function Layout() {
 ### WCAG 2.1 AA Compliance
 
 #### 1. Keyboard Navigation
+
 - ✅ **Tab:** Navigate through drawer items
 - ✅ **Shift+Tab:** Navigate backward
 - ✅ **Enter/Space:** Activate links/buttons
 - ✅ **Escape:** Close drawer, return focus
 
 #### 2. Focus Management
+
 - ✅ Focus moves to close button when drawer opens
 - ✅ Focus trapped within drawer (no background interaction)
 - ✅ Focus returns to hamburger when drawer closes
 - ✅ Visible focus indicators (2px outline)
 
 #### 3. ARIA Attributes
+
 ```tsx
 // Hamburger button
 aria-label="Open navigation menu"
@@ -653,12 +679,14 @@ aria-current="page"
 ```
 
 #### 4. Screen Reader Support
+
 - ✅ Hamburger announces: "Open navigation menu, button"
 - ✅ Drawer announces: "Mobile navigation, navigation"
 - ✅ Active link announces: "Home, link, current page"
 - ✅ Close button announces: "Close navigation menu, button"
 
 #### 5. Touch Targets
+
 - ✅ Minimum size: 44×44px (WCAG 2.5.5)
 - ✅ Adequate spacing between targets
 - ✅ No overlapping interactive elements
@@ -670,6 +698,7 @@ aria-current="page"
 ### Manual Testing Checklist
 
 #### Functional Tests
+
 - [ ] Hamburger button opens drawer
 - [ ] Drawer slides in smoothly (300ms)
 - [ ] Backdrop appears behind drawer
@@ -682,6 +711,7 @@ aria-current="page"
 - [ ] Mobile nav shows on mobile
 
 #### Accessibility Tests
+
 - [ ] Tab through all interactive elements
 - [ ] Focus visible on all elements
 - [ ] Escape closes drawer
@@ -691,6 +721,7 @@ aria-current="page"
 - [ ] All touch targets ≥ 44×44px
 
 #### Visual Tests
+
 - [ ] Drawer width 280px (max 70vw)
 - [ ] Backdrop opacity 0.5
 - [ ] Active state uses primary color
@@ -700,6 +731,7 @@ aria-current="page"
 - [ ] No layout shift on load
 
 #### Cross-Browser Tests
+
 - [ ] iOS Safari (iPhone 12, 14, 15 Pro)
 - [ ] Android Chrome (Pixel, Samsung)
 - [ ] Desktop Chrome (resize to mobile)
@@ -721,10 +753,10 @@ describe('MobileNav', () => {
         <MobileNav />
       </BrowserRouter>
     )
-    
+
     const hamburger = screen.getByLabelText('Open navigation menu')
     fireEvent.click(hamburger)
-    
+
     const drawer = screen.getByLabelText('Mobile navigation')
     expect(drawer).not.toHaveAttribute('hidden')
   })
@@ -735,12 +767,12 @@ describe('MobileNav', () => {
         <MobileNav />
       </BrowserRouter>
     )
-    
+
     const hamburger = screen.getByLabelText('Open navigation menu')
     fireEvent.click(hamburger)
-    
+
     fireEvent.keyDown(document, { key: 'Escape' })
-    
+
     const drawer = screen.getByLabelText('Mobile navigation')
     expect(drawer).toHaveAttribute('hidden')
   })
@@ -756,6 +788,7 @@ describe('MobileNav', () => {
 **Cause:** CSS transition not applied or GPU acceleration needed
 
 **Fix:**
+
 ```css
 .mobile-nav-drawer {
   transform: translateX(-100%);
@@ -771,6 +804,7 @@ describe('MobileNav', () => {
 **Cause:** Body scroll not locked
 
 **Fix:** Ensure this effect is in MobileNav component:
+
 ```tsx
 useEffect(() => {
   if (isOpen) {
@@ -791,14 +825,12 @@ useEffect(() => {
 **Cause:** Missing focus trap implementation
 
 **Fix:** Use a focus trap library or implement manually:
+
 ```tsx
 // Install: npm install focus-trap-react
 import FocusTrap from 'focus-trap-react'
-
-<FocusTrap active={isOpen}>
-  <nav className="mobile-nav-drawer">
-    {/* Drawer content */}
-  </nav>
+;<FocusTrap active={isOpen}>
+  <nav className="mobile-nav-drawer">{/* Drawer content */}</nav>
 </FocusTrap>
 ```
 
@@ -809,6 +841,7 @@ import FocusTrap from 'focus-trap-react'
 **Cause:** Media query not working
 
 **Fix:** Ensure CSS media query is correct:
+
 ```css
 @media (min-width: 640px) {
   .mobile-nav-drawer {
@@ -824,9 +857,10 @@ import FocusTrap from 'focus-trap-react'
 **Cause:** Font encoding or emoji support
 
 **Fix:** Use SVG icon instead:
+
 ```tsx
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-  <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+  <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
 </svg>
 ```
 

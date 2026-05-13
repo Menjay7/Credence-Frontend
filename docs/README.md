@@ -30,14 +30,14 @@ This directory contains comprehensive design specifications and implementation g
    - Responsive breakpoints
    - Component organization structure
 
-4. **[Implementation Examples](./IMPLEMENTATION_EXAMPLES.md)**
+5. **[Implementation Examples](./IMPLEMENTATION_EXAMPLES.md)**
    - Practical code examples for each page
    - Reusable hooks and patterns
    - Testing examples
    - Accessibility guidelines
    - Performance considerations
 
-4. **[Mobile Navigation Pattern](./mobile-navigation-pattern.md)** ⭐ NEW
+6. **[Mobile Navigation Pattern](./mobile-navigation-pattern.md)** ⭐ NEW
    - Hybrid responsive navigation (hamburger mobile + horizontal desktop)
    - Complete implementation guide with code examples
    - Accessibility requirements (WCAG 2.1 AA)

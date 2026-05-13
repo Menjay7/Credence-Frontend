@@ -7,16 +7,19 @@ The Credence button system provides consistent, accessible button variants with 
 ## Variants
 
 ### Primary
+
 - **Use for**: Main CTAs, primary actions
 - **Visual**: Solid background with brand color
 - **Examples**: "Create bond", "Submit", "Confirm"
 
 ### Secondary
+
 - **Use for**: Alternative actions, cancel operations
 - **Visual**: Outlined with card background
 - **Examples**: "Cancel", "Go back", "Learn more"
 
 ### Ghost
+
 - **Use for**: Tertiary actions, subtle interactions
 - **Visual**: Transparent background, colored text
 - **Examples**: "Skip", "Dismiss", "View details"
@@ -24,15 +27,18 @@ The Credence button system provides consistent, accessible button variants with 
 ## States
 
 ### Default
+
 All variants have clear hover and active states with smooth transitions.
 
 ### Disabled
+
 - Reduced opacity (50%)
 - Cursor changes to `not-allowed`
 - No hover effects
 - Maintains visual hierarchy between variants
 
 ### Loading
+
 - Shows animated spinner
 - Button remains disabled during loading
 - Content visibility hidden but layout preserved
@@ -96,6 +102,7 @@ All button styles use Credence design tokens:
 ## Dark Mode
 
 All button variants automatically adapt to dark mode via CSS custom properties:
+
 - Secondary buttons use darker backgrounds
 - Ghost buttons adjust hover states
 - Focus indicators remain visible
@@ -104,6 +111,7 @@ All button variants automatically adapt to dark mode via CSS custom properties:
 ## Responsive Behavior
 
 On mobile (< 768px):
+
 - Reduced padding for better touch targets
 - Slightly smaller font size
 - Full-width buttons recommended for primary actions
@@ -111,23 +119,26 @@ On mobile (< 768px):
 ## Best Practices
 
 ### Do
+
 ✅ Use primary for the main action on a page  
 ✅ Limit to one primary button per section  
 ✅ Use secondary for alternative paths  
 ✅ Use ghost for low-priority actions  
 ✅ Show loading state during async operations  
-✅ Disable buttons when action is unavailable  
+✅ Disable buttons when action is unavailable
 
 ### Don't
+
 ❌ Use multiple primary buttons in the same context  
 ❌ Use ghost buttons for critical actions  
 ❌ Nest buttons inside other interactive elements  
 ❌ Override button styles with inline CSS  
-❌ Use buttons for navigation (use links instead)  
+❌ Use buttons for navigation (use links instead)
 
 ## Examples
 
 ### Form Actions
+
 ```tsx
 <div style={{ display: 'flex', gap: 'var(--credence-space-3)' }}>
   <Button variant="secondary" onClick={handleCancel}>
@@ -140,6 +151,7 @@ On mobile (< 768px):
 ```
 
 ### Card Actions
+
 ```tsx
 <Button variant="primary" fullWidth onClick={handleAction}>
   Get started
@@ -147,6 +159,7 @@ On mobile (< 768px):
 ```
 
 ### Inline Actions
+
 ```tsx
 <Button variant="ghost" onClick={handleDismiss}>
   Dismiss

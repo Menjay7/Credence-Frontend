@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom'
 export default function Home() {
   return (
     <div>
-      <h1 style={{ marginBottom: '0.5rem', color: 'var(--text-primary)' }}>Credence — Economic Trust</h1>
+      <h1 style={{ marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
+        Credence — Economic Trust
+      </h1>
       <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
         On-chain economic identity on Stellar. Stake USDC as a programmable reputation bond.
       </p>

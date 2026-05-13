@@ -49,6 +49,7 @@
 ### Mobile Hamburger Button
 
 #### Dimensions
+
 ```
 Touch Target: 44×44px (WCAG 2.5.5 minimum)
 Icon Size: 24×24px
@@ -56,14 +57,16 @@ Border Radius: 8px
 ```
 
 #### States
-| State | Background | Icon Color | Transform | Outline |
-|-------|------------|------------|-----------|---------|
-| **Default** | `transparent` | `var(--text-primary)` | `scale(1)` | None |
-| **Hover** | `var(--bg-page)` | `var(--text-primary)` | `scale(1)` | None |
-| **Active** | `var(--bg-page)` | `var(--text-primary)` | `scale(0.95)` | None |
-| **Focus** | `transparent` | `var(--text-primary)` | `scale(1)` | `2px solid var(--color-primary)` |
+
+| State       | Background       | Icon Color            | Transform     | Outline                          |
+| ----------- | ---------------- | --------------------- | ------------- | -------------------------------- |
+| **Default** | `transparent`    | `var(--text-primary)` | `scale(1)`    | None                             |
+| **Hover**   | `var(--bg-page)` | `var(--text-primary)` | `scale(1)`    | None                             |
+| **Active**  | `var(--bg-page)` | `var(--text-primary)` | `scale(0.95)` | None                             |
+| **Focus**   | `transparent`    | `var(--text-primary)` | `scale(1)`    | `2px solid var(--color-primary)` |
 
 #### Icon (Hamburger ☰)
+
 ```
 Type: Three horizontal lines
 Line Width: 2px
@@ -73,11 +76,12 @@ Color: var(--text-primary)
 ```
 
 **SVG Export:**
+
 ```svg
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-  <path d="M3 12h18M3 6h18M3 18h18" 
-        stroke="currentColor" 
-        stroke-width="2" 
+  <path d="M3 12h18M3 6h18M3 18h18"
+        stroke="currentColor"
+        stroke-width="2"
         stroke-linecap="round"/>
 </svg>
 ```
@@ -87,6 +91,7 @@ Color: var(--text-primary)
 ### Mobile Drawer
 
 #### Dimensions
+
 ```
 Width: 280px
 Max Width: 70vw (responsive)
@@ -96,6 +101,7 @@ Z-index: 1000
 ```
 
 #### Visual Style
+
 ```
 Background: var(--bg-card)
 Border Right: 1px solid var(--border-default)
@@ -104,6 +110,7 @@ Overflow Y: auto (scrollable if content exceeds viewport)
 ```
 
 #### Animation
+
 ```
 Property: transform
 Duration: 300ms
@@ -113,6 +120,7 @@ To: translateX(0) (visible on-screen)
 ```
 
 #### Layout Structure
+
 ```
 ┌─────────────────────────┐
 │ Header (Close Button)   │ ← 60px height
@@ -129,6 +137,7 @@ To: translateX(0) (visible on-screen)
 ### Drawer Header
 
 #### Dimensions
+
 ```
 Height: 60px
 Padding: 16px
@@ -136,6 +145,7 @@ Border Bottom: 1px solid var(--border-default)
 ```
 
 #### Close Button (✕)
+
 ```
 Touch Target: 44×44px
 Icon Size: 24×24px
@@ -143,17 +153,18 @@ Border Radius: 8px
 Position: Right-aligned
 ```
 
-| State | Background | Icon Color | Outline |
-|-------|------------|------------|---------|
-| **Default** | `transparent` | `var(--text-primary)` | None |
-| **Hover** | `var(--bg-page)` | `var(--text-primary)` | None |
-| **Focus** | `transparent` | `var(--text-primary)` | `2px solid var(--color-primary)` |
+| State       | Background       | Icon Color            | Outline                          |
+| ----------- | ---------------- | --------------------- | -------------------------------- |
+| **Default** | `transparent`    | `var(--text-primary)` | None                             |
+| **Hover**   | `var(--bg-page)` | `var(--text-primary)` | None                             |
+| **Focus**   | `transparent`    | `var(--text-primary)` | `2px solid var(--color-primary)` |
 
 ---
 
 ### Navigation Links (Mobile Drawer)
 
 #### Dimensions
+
 ```
 Padding: 12px 16px
 Margin Bottom: 4px
@@ -164,6 +175,7 @@ Line Height: 1.5
 ```
 
 #### Layout
+
 ```
 Display: flex
 Align Items: center
@@ -174,14 +186,16 @@ Gap: 12px
 ```
 
 #### States
-| State | Background | Text Color | Icon Color |
-|-------|------------|------------|------------|
-| **Default** | `transparent` | `var(--text-primary)` | `var(--text-primary)` |
-| **Hover** | `var(--bg-page)` | `var(--text-primary)` | `var(--text-primary)` |
-| **Active** | `var(--color-primary)` | `white` | `white` |
-| **Focus** | `transparent` | `var(--text-primary)` | `2px solid var(--color-primary)` |
+
+| State       | Background             | Text Color            | Icon Color                       |
+| ----------- | ---------------------- | --------------------- | -------------------------------- |
+| **Default** | `transparent`          | `var(--text-primary)` | `var(--text-primary)`            |
+| **Hover**   | `var(--bg-page)`       | `var(--text-primary)` | `var(--text-primary)`            |
+| **Active**  | `var(--color-primary)` | `white`               | `white`                          |
+| **Focus**   | `transparent`          | `var(--text-primary)` | `2px solid var(--color-primary)` |
 
 #### Icons
+
 ```
 Size: 20×20px
 Type: Emoji or SVG
@@ -196,6 +210,7 @@ Examples:
 ### Backdrop Overlay
 
 #### Dimensions
+
 ```
 Width: 100vw
 Height: 100vh
@@ -204,12 +219,14 @@ Z-index: 999 (below drawer)
 ```
 
 #### Visual Style
+
 ```
 Background: rgba(0, 0, 0, 0.5)
 Backdrop Filter: blur(2px) (optional, for modern browsers)
 ```
 
 #### Animation
+
 ```
 Property: opacity
 Duration: 300ms
@@ -223,6 +240,7 @@ To: opacity 1
 ### Desktop Navigation (Existing)
 
 #### Dimensions
+
 ```
 Display: flex
 Gap: 16px (1rem)
@@ -230,6 +248,7 @@ Align Items: center
 ```
 
 #### Navigation Links
+
 ```
 Padding: 8px 16px (0.5rem 1rem)
 Font Size: 16px
@@ -238,18 +257,20 @@ Border Radius: 8px
 ```
 
 #### States
-| State | Background | Text Color | Font Weight |
-|-------|------------|------------|-------------|
-| **Default** | `transparent` | `var(--text-primary)` | 500 |
-| **Hover** | `var(--bg-page)` | `var(--text-primary)` | 500 |
-| **Active** | `transparent` | `var(--color-primary)` | 600 |
-| **Focus** | `transparent` | `var(--text-primary)` | 500, outline |
+
+| State       | Background       | Text Color             | Font Weight  |
+| ----------- | ---------------- | ---------------------- | ------------ |
+| **Default** | `transparent`    | `var(--text-primary)`  | 500          |
+| **Hover**   | `var(--bg-page)` | `var(--text-primary)`  | 500          |
+| **Active**  | `transparent`    | `var(--color-primary)` | 600          |
+| **Focus**   | `transparent`    | `var(--text-primary)`  | 500, outline |
 
 ---
 
 ## 🎨 Design Tokens
 
 ### Spacing
+
 ```json
 {
   "mobile-nav": {
@@ -271,6 +292,7 @@ Border Radius: 8px
 ```
 
 ### Colors
+
 ```json
 {
   "navigation": {
@@ -288,6 +310,7 @@ Border Radius: 8px
 ```
 
 ### Animation
+
 ```json
 {
   "navigation": {
@@ -302,6 +325,7 @@ Border Radius: 8px
 ```
 
 ### Typography
+
 ```json
 {
   "navigation": {
@@ -316,6 +340,7 @@ Border Radius: 8px
 ```
 
 ### Z-Index
+
 ```json
 {
   "navigation": {
@@ -330,6 +355,7 @@ Border Radius: 8px
 ## 📱 Responsive Breakpoints
 
 ### Mobile (< 640px)
+
 ```
 Show: Hamburger button + drawer
 Hide: Desktop horizontal nav
@@ -337,12 +363,14 @@ Drawer Width: 280px (max 70vw)
 ```
 
 ### Tablet (640px - 1024px)
+
 ```
 Show: Desktop horizontal nav
 Hide: Hamburger button + drawer
 ```
 
 ### Desktop (> 1024px)
+
 ```
 Show: Desktop horizontal nav
 Hide: Hamburger button + drawer
@@ -355,10 +383,12 @@ Hide: Hamburger button + drawer
 ### Hamburger Button Component
 
 **Properties:**
+
 - `State`: Default | Hover | Active | Focus | Disabled
 - `Theme`: Light | Dark
 
 **Instances:**
+
 ```
 Hamburger/Default/Light
 Hamburger/Hover/Light
@@ -374,11 +404,13 @@ Hamburger/Hover/Dark
 ### Drawer Component
 
 **Properties:**
+
 - `State`: Closed | Open
 - `Theme`: Light | Dark
 - `Content`: Home | Bond | Trust (active page)
 
 **Instances:**
+
 ```
 Drawer/Closed/Light
 Drawer/Open/Light/Home-Active
@@ -392,11 +424,13 @@ Drawer/Open/Dark/Home-Active
 ### Navigation Link Component (Mobile)
 
 **Properties:**
+
 - `State`: Default | Hover | Active | Focus
 - `Theme`: Light | Dark
 - `Icon`: Home | Bond | Trust | Custom
 
 **Instances:**
+
 ```
 NavLink-Mobile/Default/Light/Home
 NavLink-Mobile/Hover/Light/Home
@@ -411,45 +445,45 @@ NavLink-Mobile/Focus/Light/Home
 
 ### Hamburger Button
 
-| Figma Property | CSS Property | Value |
-|----------------|--------------|-------|
-| Width | `width` | `44px` |
-| Height | `height` | `44px` |
-| Fill | `background` | `transparent` |
-| Border Radius | `border-radius` | `8px` |
-| Icon Color | `color` | `var(--text-primary)` |
-| Hover Fill | `background:hover` | `var(--bg-page)` |
-| Focus Outline | `outline:focus-visible` | `2px solid var(--color-primary)` |
+| Figma Property | CSS Property            | Value                            |
+| -------------- | ----------------------- | -------------------------------- |
+| Width          | `width`                 | `44px`                           |
+| Height         | `height`                | `44px`                           |
+| Fill           | `background`            | `transparent`                    |
+| Border Radius  | `border-radius`         | `8px`                            |
+| Icon Color     | `color`                 | `var(--text-primary)`            |
+| Hover Fill     | `background:hover`      | `var(--bg-page)`                 |
+| Focus Outline  | `outline:focus-visible` | `2px solid var(--color-primary)` |
 
 ---
 
 ### Drawer
 
-| Figma Property | CSS Property | Value |
-|----------------|--------------|-------|
-| Width | `width` | `280px` |
-| Max Width | `max-width` | `70vw` |
-| Height | `height` | `100vh` |
-| Fill | `background` | `var(--bg-card)` |
-| Border Right | `border-right` | `1px solid var(--border-default)` |
-| Shadow | `box-shadow` | `4px 0 12px rgba(0,0,0,0.15)` |
-| Position | `position` | `fixed` |
-| Z-Index | `z-index` | `1000` |
+| Figma Property | CSS Property   | Value                             |
+| -------------- | -------------- | --------------------------------- |
+| Width          | `width`        | `280px`                           |
+| Max Width      | `max-width`    | `70vw`                            |
+| Height         | `height`       | `100vh`                           |
+| Fill           | `background`   | `var(--bg-card)`                  |
+| Border Right   | `border-right` | `1px solid var(--border-default)` |
+| Shadow         | `box-shadow`   | `4px 0 12px rgba(0,0,0,0.15)`     |
+| Position       | `position`     | `fixed`                           |
+| Z-Index        | `z-index`      | `1000`                            |
 
 ---
 
 ### Navigation Link (Mobile)
 
-| Figma Property | CSS Property | Value |
-|----------------|--------------|-------|
-| Padding | `padding` | `12px 16px` |
-| Border Radius | `border-radius` | `8px` |
-| Font Size | `font-size` | `16px` |
-| Font Weight | `font-weight` | `600` |
-| Text Color | `color` | `var(--text-primary)` |
-| Active Fill | `background.active` | `var(--color-primary)` |
-| Active Text | `color.active` | `white` |
-| Hover Fill | `background:hover` | `var(--bg-page)` |
+| Figma Property | CSS Property        | Value                  |
+| -------------- | ------------------- | ---------------------- |
+| Padding        | `padding`           | `12px 16px`            |
+| Border Radius  | `border-radius`     | `8px`                  |
+| Font Size      | `font-size`         | `16px`                 |
+| Font Weight    | `font-weight`       | `600`                  |
+| Text Color     | `color`             | `var(--text-primary)`  |
+| Active Fill    | `background.active` | `var(--color-primary)` |
+| Active Text    | `color.active`      | `white`                |
+| Hover Fill     | `background:hover`  | `var(--bg-page)`       |
 
 ---
 
@@ -458,17 +492,20 @@ NavLink-Mobile/Focus/Light/Home
 ### For Developers
 
 #### Icons
+
 - **Format:** SVG (preferred) or PNG @2x/3x
 - **Size:** 24×24px (hamburger), 20×20px (nav icons)
 - **Naming:** `icon-hamburger.svg`, `icon-home.svg`, `icon-bond.svg`
 - **Color:** Use `currentColor` for SVG fill/stroke
 
 #### Components
+
 - **Export:** Figma Dev Mode (CSS, React)
 - **Naming:** Match component file names (`MobileNav`, `DesktopNav`)
 - **Spacing:** Export as CSS custom properties
 
 #### Screens
+
 - **Format:** PNG @2x (retina)
 - **Naming:** `mobile-nav-closed.png`, `mobile-nav-open.png`, `desktop-nav.png`
 - **Annotations:** Include spacing, colors, typography specs
@@ -480,6 +517,7 @@ NavLink-Mobile/Focus/Light/Home
 Before handoff to development:
 
 ### Mobile Navigation
+
 - [ ] Hamburger button has all states (default, hover, active, focus)
 - [ ] Drawer has open/closed states
 - [ ] Backdrop overlay specified
@@ -490,6 +528,7 @@ Before handoff to development:
 - [ ] Dark mode variants created
 
 ### Desktop Navigation
+
 - [ ] Horizontal nav layout specified
 - [ ] Navigation links have all states
 - [ ] Active page highlighted
@@ -497,17 +536,20 @@ Before handoff to development:
 - [ ] Dark mode variants created
 
 ### Responsive
+
 - [ ] Mobile breakpoint (< 640px) documented
 - [ ] Desktop breakpoint (≥ 640px) documented
 - [ ] Transition between breakpoints smooth
 
 ### Accessibility
+
 - [ ] Touch targets ≥ 44×44px
 - [ ] Focus outlines visible (2px, primary color)
 - [ ] Color contrast ≥ 4.5:1 (WCAG AA)
 - [ ] Active states distinguishable without color alone
 
 ### Tokens
+
 - [ ] Spacing values documented
 - [ ] Color values documented
 - [ ] Typography values documented
@@ -515,6 +557,7 @@ Before handoff to development:
 - [ ] Z-index values documented
 
 ### Export
+
 - [ ] All icons exported (SVG)
 - [ ] Component specs exported (Figma Dev Mode)
 - [ ] Screenshots exported (PNG @2x)

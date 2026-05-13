@@ -3,7 +3,15 @@ import ThemeToggle from './ThemeToggle'
 
 export default function Layout() {
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--bg-page)', color: 'var(--text-primary)' }}>
+    <div
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        background: 'var(--bg-page)',
+        color: 'var(--text-primary)',
+      }}
+    >
       <a className="skip-link" href="#main-content">
         Skip to main content
       </a>
@@ -17,7 +25,15 @@ export default function Layout() {
           gap: '1.5rem',
         }}
       >
-        <Link to="/" style={{ fontWeight: 700, fontSize: '1.25rem', color: 'var(--text-primary)', textDecoration: 'none' }}>
+        <Link
+          to="/"
+          style={{
+            fontWeight: 700,
+            fontSize: '1.25rem',
+            color: 'var(--text-primary)',
+            textDecoration: 'none',
+          }}
+        >
           Credence
         </Link>
         <nav aria-label="Main navigation" style={{ display: 'flex', gap: '1rem', flex: 1 }}>
@@ -42,13 +58,21 @@ export default function Layout() {
       <footer className="app-footer">
         <div className="container footer-content">
           <div>
-            <p style={{ fontWeight: 600, color: 'var(--slate-900)', marginBottom: '0.25rem' }}>Credence</p>
+            <p style={{ fontWeight: 600, color: 'var(--slate-900)', marginBottom: '0.25rem' }}>
+              Credence
+            </p>
             <p>© 2026 Credence Protocol. Built on Stellar.</p>
           </div>
           <div className="footer-links">
-            <a href="#" className="footer-link">Documentation</a>
-            <a href="#" className="footer-link">Terms of Service</a>
-            <a href="#" className="footer-link">Privacy Policy</a>
+            <a href="#" className="footer-link">
+              Documentation
+            </a>
+            <a href="#" className="footer-link">
+              Terms of Service
+            </a>
+            <a href="#" className="footer-link">
+              Privacy Policy
+            </a>
           </div>
         </div>
       </footer>

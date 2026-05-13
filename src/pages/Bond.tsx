@@ -3,6 +3,7 @@ import Disclaimer from '../components/Disclaimer'
 import { useToast } from '../components/ToastProvider'
 import Badge from '../components/Badge'
 import ActionCard from '../components/ActionCard'
+import Button from '../components/Button'
 
 export default function Bond() {
   const { addToast } = useToast()
@@ -82,7 +83,7 @@ export default function Bond() {
             }}
           >
             Create bond
-          </button>
+          </Button>
         </ActionCard>
 
         <ActionCard title="Active Bonds">
@@ -95,7 +96,8 @@ export default function Bond() {
                   justifyContent: 'space-between',
                   alignItems: 'center',
                   paddingBlock: 'var(--credence-space-3)',
-                  borderBottom: bond.id === mockBonds.length ? 'none' : '1px solid var(--border-default)',
+                  borderBottom:
+                    bond.id === mockBonds.length ? 'none' : '1px solid var(--border-default)',
                   gap: 'var(--credence-space-4)',
                 }}
               >

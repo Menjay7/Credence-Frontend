@@ -11,6 +11,7 @@ This document provides visual design specifications for implementing UI states i
 ### Color Palette
 
 #### Empty States
+
 ```
 Bond (Blue):
 - Background: #dbeafe
@@ -39,6 +40,7 @@ Activity (Yellow):
 ```
 
 #### Error States
+
 ```
 Background: #fef2f2
 Border: #fee2e2 (1px solid)
@@ -49,6 +51,7 @@ Button: #dc2626
 ```
 
 #### Loading States
+
 ```
 Base: #f1f5f9
 Shimmer: #e2e8f0
@@ -138,6 +141,7 @@ Action Button:
 ### Loading Skeleton Variants
 
 #### Text Skeleton
+
 ```
 Height: 16px
 Border-radius: 8px
@@ -147,6 +151,7 @@ Animation: shimmer 1.5s infinite
 ```
 
 #### Card Skeleton
+
 ```
 Container:
 - Border: 1px solid #e2e8f0
@@ -165,6 +170,7 @@ Content lines:
 ```
 
 #### Form Skeleton
+
 ```
 Field group (repeated):
 - Margin-bottom: 24px
@@ -180,6 +186,7 @@ Input:
 ```
 
 #### Table Skeleton
+
 ```
 Header row:
 - Height: 48px
@@ -191,6 +198,7 @@ Data rows:
 ```
 
 #### Dashboard Skeleton
+
 ```
 Grid:
 - Grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
@@ -220,12 +228,7 @@ Cards:
 }
 
 /* Applied to skeleton elements */
-background: linear-gradient(
-  90deg,
-  #f1f5f9 25%,
-  #e2e8f0 50%,
-  #f1f5f9 75%
-);
+background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
 background-size: 200% 100%;
 animation: shimmer 1.5s infinite;
 ```
@@ -239,6 +242,7 @@ animation: shimmer 1.5s infinite;
 ## 📱 Responsive Breakpoints
 
 ### Mobile (< 640px)
+
 ```
 Empty/Error State:
 - Padding: 32px 16px
@@ -252,6 +256,7 @@ Loading Skeleton:
 ```
 
 ### Tablet (640px - 1024px)
+
 ```
 Empty/Error State:
 - Padding: 40px 20px
@@ -263,6 +268,7 @@ Loading Skeleton:
 ```
 
 ### Desktop (> 1024px)
+
 ```
 Empty/Error State:
 - Padding: 48px 24px
@@ -288,14 +294,14 @@ Loading Skeleton:
     🎨 Dispute Empty
     🎨 Attestation Empty
     🎨 Activity Empty
-  
+
   📁 Error States
     🎨 Base Component
     🎨 Network Error
     🎨 Backend Error
     🎨 Validation Error
     🎨 Generic Error
-  
+
   📁 Loading Skeletons
     🎨 Text Skeleton
     🎨 Card Skeleton
@@ -307,15 +313,18 @@ Loading Skeleton:
 ### Component Properties (Figma)
 
 **Empty State**:
+
 - Variant: bond | trust | dispute | attestation | activity
 - Has Action: boolean
 - Action Type: primary | secondary
 
 **Error State**:
+
 - Type: network | backend | validation | generic
 - Has Action: boolean
 
 **Loading Skeleton**:
+
 - Variant: text | card | form | table | dashboard
 - Rows: number (1-10)
 
@@ -396,16 +405,19 @@ Before handoff to development:
 ### For Developers
 
 **Icons/Illustrations**:
+
 - Format: SVG
 - Size: 64px × 64px (2x for retina)
 - Naming: `icon-[state]-[variant].svg`
 
 **Screenshots**:
+
 - Format: PNG
 - Resolution: 2x retina
 - Naming: `state-[type]-[variant].png`
 
 **Specs**:
+
 - Export spacing measurements
 - Export color values (hex)
 - Export typography styles

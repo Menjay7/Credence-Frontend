@@ -9,22 +9,26 @@ This PR implements comprehensive UI state patterns for the Credence Frontend app
 ### What's Included
 
 #### 🎨 Components (3 new)
+
 - `EmptyState.tsx` - Configurable empty state component with 5 illustration variants
 - `ErrorState.tsx` - Error state component with 4 error types (network, backend, validation, generic)
 - `LoadingSkeleton.tsx` - Loading skeleton with 5 variants (text, card, form, table, dashboard)
 
 #### 📚 Documentation (4 files)
+
 - `UI_STATES_GUIDE.md` - Complete guide with design principles, microcopy guidelines, and usage patterns
 - `FIGMA_DESIGN_SPECS.md` - Visual specifications, color palette, layout measurements, and design tokens
 - `IMPLEMENTATION_EXAMPLES.md` - Practical code examples, hooks, testing, and accessibility guidelines
 - `README.md` - Documentation index and quick start guide
 
 #### 🎬 Animations
+
 - Added shimmer animation to `index.css` for loading skeletons
 
 ### Features
 
 #### Empty States
+
 - ✅ No bond yet
 - ✅ No trust score yet
 - ✅ No disputes
@@ -32,12 +36,14 @@ This PR implements comprehensive UI state patterns for the Credence Frontend app
 - ✅ No activity
 
 #### Error States
+
 - ✅ Network failures
 - ✅ Backend errors
 - ✅ Invalid addresses
 - ✅ Generic errors
 
 #### Loading Skeletons
+
 - ✅ Form loading
 - ✅ Card/Dashboard loading
 - ✅ Table loading
@@ -56,11 +62,11 @@ This PR implements comprehensive UI state patterns for the Credence Frontend app
 ```tsx
 function MyComponent() {
   const { data, isLoading, error } = useQuery()
-  
+
   if (isLoading) return <LoadingSkeleton variant="card" />
   if (error) return <ErrorState type="network" />
   if (!data) return <EmptyState title="..." description="..." />
-  
+
   return <Content data={data} />
 }
 ```
@@ -120,6 +126,7 @@ _To be added: Screenshots of each state variant_
 ### Review Notes
 
 Please review:
+
 1. Component API and prop interfaces
 2. Microcopy tone and messaging
 3. Color choices and visual hierarchy

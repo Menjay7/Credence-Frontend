@@ -26,12 +26,12 @@ Ephemeral overlay notification triggered by user actions or system events.
 
 ## Banner Severity Variants
 
-| Severity   | Use case                                      | Example events                                      |
-|------------|-----------------------------------------------|-----------------------------------------------------|
-| `info`     | Neutral context / informational protocol note | Bond lock period reminder, score epoch note         |
-| `success`  | Positive outcome                              | Bond created, score retrieved, vote submitted       |
-| `warning`  | Non-critical concern                          | Bond nearing slash threshold, low balance           |
-| `critical` | Critical / destructive / incident             | Bond slashed, protocol paused, transaction failed   |
+| Severity   | Use case                                      | Example events                                    |
+| ---------- | --------------------------------------------- | ------------------------------------------------- |
+| `info`     | Neutral context / informational protocol note | Bond lock period reminder, score epoch note       |
+| `success`  | Positive outcome                              | Bond created, score retrieved, vote submitted     |
+| `warning`  | Non-critical concern                          | Bond nearing slash threshold, low balance         |
+| `critical` | Critical / destructive / incident             | Bond slashed, protocol paused, transaction failed |
 
 > Note: `critical` replaces the former `danger` severity for banners to align with incident messaging language.
 
@@ -50,8 +50,7 @@ These two patterns are visually distinct and carry different user expectations.
 
 ```tsx
 <Banner severity="critical" title="Protocol Paused">
-  All bond operations are suspended. Monitor the{' '}
-  <a href="/status">status page</a> for updates.
+  All bond operations are suspended. Monitor the <a href="/status">status page</a> for updates.
 </Banner>
 ```
 
@@ -81,15 +80,15 @@ const triggerRef = useRef<HTMLButtonElement>(null)
 
 ## Banner Props
 
-| Prop             | Type                          | Required | Description                                                    |
-|------------------|-------------------------------|----------|----------------------------------------------------------------|
-| `severity`       | `'info' \| 'success' \| 'warning' \| 'critical'` | ✓ | Visual and semantic severity |
-| `children`       | `ReactNode`                   | ✓        | Message body content                                           |
-| `title`          | `string`                      |          | Short bold heading above the message                           |
-| `dismissible`    | `boolean`                     |          | Renders close button; makes banner dismissible                 |
-| `onDismiss`      | `() => void`                  |          | Called when close button is activated                          |
-| `action`         | `{ label, href?, onClick? }`  |          | Inline CTA link or button after the message                    |
-| `returnFocusRef` | `RefObject<HTMLElement>`      |          | Element to focus after dismiss (defaults to `document.body`)   |
+| Prop             | Type                                             | Required | Description                                                  |
+| ---------------- | ------------------------------------------------ | -------- | ------------------------------------------------------------ |
+| `severity`       | `'info' \| 'success' \| 'warning' \| 'critical'` | ✓        | Visual and semantic severity                                 |
+| `children`       | `ReactNode`                                      | ✓        | Message body content                                         |
+| `title`          | `string`                                         |          | Short bold heading above the message                         |
+| `dismissible`    | `boolean`                                        |          | Renders close button; makes banner dismissible               |
+| `onDismiss`      | `() => void`                                     |          | Called when close button is activated                        |
+| `action`         | `{ label, href?, onClick? }`                     |          | Inline CTA link or button after the message                  |
+| `returnFocusRef` | `RefObject<HTMLElement>`                         |          | Element to focus after dismiss (defaults to `document.body`) |
 
 ---
 
@@ -98,20 +97,20 @@ const triggerRef = useRef<HTMLButtonElement>(null)
 
 ## Placement Rules
 
-| Type | Position | Scope |
-|------|----------|-------|
-| Global banner | Between header and `<main>` in Layout | Protocol-wide alerts (e.g. "Protocol paused") |
-| Contextual banner | Inline within page content | Page-specific guidance or warnings |
-| Toast | Fixed Overlay | **Desktop**: Top-Right. **Mobile**: Bottom-Center. |
+| Type              | Position                              | Scope                                              |
+| ----------------- | ------------------------------------- | -------------------------------------------------- |
+| Global banner     | Between header and `<main>` in Layout | Protocol-wide alerts (e.g. "Protocol paused")      |
+| Contextual banner | Inline within page content            | Page-specific guidance or warnings                 |
+| Toast             | Fixed Overlay                         | **Desktop**: Top-Right. **Mobile**: Bottom-Center. |
 
 ## Severity Levels (Toast)
 
-| Severity  | Auto-dismiss | Rationale                                      |
-|-----------|-------------|------------------------------------------------|
-| `info`    | 5 seconds   | Low urgency, informational                     |
-| `success` | 5 seconds   | Confirmation — user can move on                |
-| `warning` | 8 seconds   | Needs attention but not blocking               |
-| `danger`  | Manual only | Must be acknowledged explicitly                |
+| Severity  | Auto-dismiss | Rationale                        |
+| --------- | ------------ | -------------------------------- |
+| `info`    | 5 seconds    | Low urgency, informational       |
+| `success` | 5 seconds    | Confirmation — user can move on  |
+| `warning` | 8 seconds    | Needs attention but not blocking |
+| `danger`  | Manual only  | Must be acknowledged explicitly  |
 
 ---
 
@@ -136,18 +135,18 @@ const triggerRef = useRef<HTMLButtonElement>(null)
 
 ## Event → Notification Mapping
 
-| Event                    | Type                              | Severity   |
-|--------------------------|-----------------------------------|------------|
-| Bond created             | Toast                             | `success`  |
-| Bond slashed             | Banner (contextual) + Toast       | `critical` |
-| Score updated            | Toast                             | `success`  |
-| Score lookup completed   | Toast                             | `info`     |
-| Governance vote submitted| Toast                             | `success`  |
-| Protocol paused          | Banner (global, persistent)       | `critical` |
-| Low wallet balance       | Banner (contextual, dismissible)  | `warning`  |
-| Transaction failed       | Toast                             | `danger`   |
-| Incident active          | Banner (global, persistent)       | `critical` |
-| Maintenance window       | Banner (global, dismissible)      | `info`     |
+| Event                     | Type                             | Severity   |
+| ------------------------- | -------------------------------- | ---------- |
+| Bond created              | Toast                            | `success`  |
+| Bond slashed              | Banner (contextual) + Toast      | `critical` |
+| Score updated             | Toast                            | `success`  |
+| Score lookup completed    | Toast                            | `info`     |
+| Governance vote submitted | Toast                            | `success`  |
+| Protocol paused           | Banner (global, persistent)      | `critical` |
+| Low wallet balance        | Banner (contextual, dismissible) | `warning`  |
+| Transaction failed        | Toast                            | `danger`   |
+| Incident active           | Banner (global, persistent)      | `critical` |
+| Maintenance window        | Banner (global, dismissible)     | `info`     |
 
 ---
 
@@ -157,8 +156,7 @@ const triggerRef = useRef<HTMLButtonElement>(null)
 
 ```tsx
 import Banner from '@/components/Banner'
-
-<Banner severity="critical" title="Protocol Paused">
+;<Banner severity="critical" title="Protocol Paused">
   All bond operations are suspended pending governance resolution.{' '}
   <a href="/governance">View proposal →</a>
 </Banner>
@@ -170,27 +168,26 @@ import Banner from '@/components/Banner'
 const triggerRef = useRef<HTMLButtonElement>(null)
 const [show, setShow] = useState(true)
 
-{show && (
-  <Banner
-    severity="warning"
-    title="Bond Threshold Warning"
-    dismissible
-    onDismiss={() => setShow(false)}
-    returnFocusRef={triggerRef}
-    action={{ label: 'Top up balance', onClick: () => openTopUp() }}
-  >
-    Your bond is approaching the slash threshold.
-  </Banner>
-)}
+{
+  show && (
+    <Banner
+      severity="warning"
+      title="Bond Threshold Warning"
+      dismissible
+      onDismiss={() => setShow(false)}
+      returnFocusRef={triggerRef}
+      action={{ label: 'Top up balance', onClick: () => openTopUp() }}
+    >
+      Your bond is approaching the slash threshold.
+    </Banner>
+  )
+}
 ```
 
 ### Informational with link
 
 ```tsx
-<Banner
-  severity="info"
-  action={{ label: 'Learn more', href: '/docs/epochs' }}
->
+<Banner severity="info" action={{ label: 'Learn more', href: '/docs/epochs' }}>
   Trust scores are recalculated at the start of each epoch.
 </Banner>
 ```

@@ -9,24 +9,24 @@
 
 This spec applies to every component that **overlays or interrupts** the main content flow:
 
-| Component | Traps focus? | Returns focus? | Initial focus target |
-|-----------|:---:|:---:|---|
-| Modal / confirmation dialog | Yes | Yes | First focusable element or primary action |
-| Full-screen overlay | Yes | Yes | Close / dismiss button |
-| Danger banner (persistent, page-blocking) | No — but manages focus on appear | Yes | Dismiss button |
-| Toast (ephemeral) | No | No | N/A (announced via `aria-live`) |
-| Contextual inline banner | No | No | N/A (in-flow content) |
+| Component                                 |           Traps focus?           | Returns focus? | Initial focus target                      |
+| ----------------------------------------- | :------------------------------: | :------------: | ----------------------------------------- |
+| Modal / confirmation dialog               |               Yes                |      Yes       | First focusable element or primary action |
+| Full-screen overlay                       |               Yes                |      Yes       | Close / dismiss button                    |
+| Danger banner (persistent, page-blocking) | No — but manages focus on appear |      Yes       | Dismiss button                            |
+| Toast (ephemeral)                         |                No                |       No       | N/A (announced via `aria-live`)           |
+| Contextual inline banner                  |                No                |       No       | N/A (in-flow content)                     |
 
 ---
 
 ## 2. Definitions
 
-| Term | Meaning |
-|------|---------|
-| **Focus trap** | Keyboard focus is constrained to the focusable elements inside a container; Tab / Shift+Tab cycle within it. |
-| **Initial focus** | The element that receives `focus()` when an overlay first renders. |
-| **Return focus** | The element that receives `focus()` after the overlay is dismissed. |
-| **Trigger element** | The button or link that caused the overlay to open. |
+| Term                | Meaning                                                                                                      |
+| ------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **Focus trap**      | Keyboard focus is constrained to the focusable elements inside a container; Tab / Shift+Tab cycle within it. |
+| **Initial focus**   | The element that receives `focus()` when an overlay first renders.                                           |
+| **Return focus**    | The element that receives `focus()` after the overlay is dismissed.                                          |
+| **Trigger element** | The button or link that caused the overlay to open.                                                          |
 
 ---
 
@@ -58,27 +58,30 @@ Shift+Tab from [Close ✕] → wraps to [Confirm]
 **Implementation guidance:**
 
 1. On mount, query all focusable elements inside the overlay container:
+
    ```ts
-   const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
-   const focusables = overlay.querySelectorAll(FOCUSABLE);
-   const first = focusables[0];
-   const last = focusables[focusables.length - 1];
+   const FOCUSABLE =
+     'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+   const focusables = overlay.querySelectorAll(FOCUSABLE)
+   const first = focusables[0]
+   const last = focusables[focusables.length - 1]
    ```
 
 2. Add a `keydown` listener on the overlay root:
+
    ```ts
    function handleKeyDown(e: KeyboardEvent) {
      if (e.key === 'Tab') {
        if (e.shiftKey && document.activeElement === first) {
-         e.preventDefault();
-         last.focus();
+         e.preventDefault()
+         last.focus()
        } else if (!e.shiftKey && document.activeElement === last) {
-         e.preventDefault();
-         first.focus();
+         e.preventDefault()
+         first.focus()
        }
      }
      if (e.key === 'Escape') {
-       closeOverlay();
+       closeOverlay()
      }
    }
    ```
@@ -87,7 +90,7 @@ Shift+Tab from [Close ✕] → wraps to [Confirm]
 
 4. **Prefer a custom React hook** (`useFocusTrap`) so every overlay shares the same logic. Suggested signature:
    ```ts
-   function useFocusTrap(containerRef: RefObject<HTMLElement>, isActive: boolean): void;
+   function useFocusTrap(containerRef: RefObject<HTMLElement>, isActive: boolean): void
    ```
 
 ### 3.3 Escape key
@@ -98,13 +101,13 @@ All trapped overlays **must** close on `Escape`. This is both a WCAG requirement
 
 ## 4. Initial Focus Rules
 
-| Overlay type | Initial focus target | Rationale |
-|---|---|---|
-| Confirmation dialog (destructive action) | **Cancel** button | Prevent accidental destructive confirmation |
-| Confirmation dialog (non-destructive) | **Primary action** button | Speed up the happy path |
-| Form dialog / modal with inputs | **First input** field | Reduce keystrokes to begin data entry |
-| Informational modal (no form) | **Close** button | Fastest path to dismiss |
-| Danger banner (persistent) | **Dismiss** button | Draw attention to required acknowledgment |
+| Overlay type                             | Initial focus target      | Rationale                                   |
+| ---------------------------------------- | ------------------------- | ------------------------------------------- |
+| Confirmation dialog (destructive action) | **Cancel** button         | Prevent accidental destructive confirmation |
+| Confirmation dialog (non-destructive)    | **Primary action** button | Speed up the happy path                     |
+| Form dialog / modal with inputs          | **First input** field     | Reduce keystrokes to begin data entry       |
+| Informational modal (no form)            | **Close** button          | Fastest path to dismiss                     |
+| Danger banner (persistent)               | **Dismiss** button        | Draw attention to required acknowledgment   |
 
 ### Wire-level notes
 
@@ -114,10 +117,10 @@ useEffect(() => {
   if (isOpen && initialFocusRef.current) {
     // Small delay ensures the DOM has painted and transition is underway
     requestAnimationFrame(() => {
-      initialFocusRef.current?.focus();
-    });
+      initialFocusRef.current?.focus()
+    })
   }
-}, [isOpen]);
+}, [isOpen])
 ```
 
 - Use a dedicated `initialFocusRef` rather than always focusing the first element. This allows per-dialog control.
@@ -134,30 +137,30 @@ When any overlay closes, focus **must** return to the **trigger element** — th
 
 ```tsx
 // Store trigger on open
-const triggerRef = useRef<HTMLElement | null>(null);
+const triggerRef = useRef<HTMLElement | null>(null)
 
 function openOverlay() {
-  triggerRef.current = document.activeElement as HTMLElement;
-  setIsOpen(true);
+  triggerRef.current = document.activeElement as HTMLElement
+  setIsOpen(true)
 }
 
 function closeOverlay() {
-  setIsOpen(false);
+  setIsOpen(false)
   // Restore after React re-renders
   requestAnimationFrame(() => {
-    triggerRef.current?.focus();
-  });
+    triggerRef.current?.focus()
+  })
 }
 ```
 
 ### Edge cases
 
-| Scenario | Behavior |
-|---|---|
-| Trigger element is unmounted while overlay is open | Focus the nearest logical ancestor or `<main>` |
-| Overlay dismissed by route change | No explicit return focus; new page follows normal focus flow (skip-link → content) |
-| Overlay dismissed by Escape | Same as button dismiss — return to trigger |
-| Nested overlays (overlay opens overlay) | Each overlay stores its own trigger; closing inner returns to outer's last active element |
+| Scenario                                           | Behavior                                                                                  |
+| -------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Trigger element is unmounted while overlay is open | Focus the nearest logical ancestor or `<main>`                                            |
+| Overlay dismissed by route change                  | No explicit return focus; new page follows normal focus flow (skip-link → content)        |
+| Overlay dismissed by Escape                        | Same as button dismiss — return to trigger                                                |
+| Nested overlays (overlay opens overlay)            | Each overlay stores its own trigger; closing inner returns to outer's last active element |
 
 ---
 
@@ -179,6 +182,7 @@ Backdrop: click-to-close; inert background (aria-hidden="true" on #root or use <
 ```
 
 **Recommended:** Use the native `<dialog>` element with `showModal()`. It provides:
+
 - Built-in focus trap
 - Built-in Escape handling
 - Built-in backdrop
@@ -192,7 +196,7 @@ Current behavior: Banners render inline with `role="alert"` or `role="status"`. 
 
 **Proposed change for persistent danger banners:**
 
-1. When a **danger** banner appears *and* is `dismissible`:
+1. When a **danger** banner appears _and_ is `dismissible`:
    - Move focus to the dismiss button on mount.
    - On dismiss, return focus to the element that was focused before the banner appeared.
 2. Non-dismissible danger banners: no focus change (the `role="alert"` announcement is sufficient).
@@ -200,19 +204,19 @@ Current behavior: Banners render inline with `role="alert"` or `role="status"`. 
 
 ```tsx
 // Banner.tsx — proposed focus behavior for danger + dismissible
-const dismissRef = useRef<HTMLButtonElement>(null);
-const previousFocus = useRef<HTMLElement | null>(null);
+const dismissRef = useRef<HTMLButtonElement>(null)
+const previousFocus = useRef<HTMLElement | null>(null)
 
 useEffect(() => {
   if (severity === 'danger' && dismissible) {
-    previousFocus.current = document.activeElement as HTMLElement;
-    requestAnimationFrame(() => dismissRef.current?.focus());
+    previousFocus.current = document.activeElement as HTMLElement
+    requestAnimationFrame(() => dismissRef.current?.focus())
   }
-}, [severity, dismissible]);
+}, [severity, dismissible])
 
 function handleDismiss() {
-  onDismiss?.();
-  requestAnimationFrame(() => previousFocus.current?.focus());
+  onDismiss?.()
+  requestAnimationFrame(() => previousFocus.current?.focus())
 }
 ```
 
@@ -243,16 +247,16 @@ When a focus-trapping overlay is active, the rest of the page must be non-intera
 
 ```tsx
 // When overlay opens
-document.getElementById('app-root')?.setAttribute('inert', '');
+document.getElementById('app-root')?.setAttribute('inert', '')
 
 // When overlay closes
-document.getElementById('app-root')?.removeAttribute('inert');
+document.getElementById('app-root')?.removeAttribute('inert')
 ```
 
 **Fallback (wider support):**
 
 ```tsx
-document.getElementById('app-root')?.setAttribute('aria-hidden', 'true');
+document.getElementById('app-root')?.setAttribute('aria-hidden', 'true')
 ```
 
 > The `inert` attribute is supported in all modern browsers (Chrome 102+, Firefox 112+, Safari 15.5+). Given Credence's target audience (crypto-native users on modern browsers), `inert` is the preferred approach.
@@ -266,19 +270,20 @@ A shared `useFocusTrap` hook keeps behavior consistent across all overlay compon
 ```ts
 interface UseFocusTrapOptions {
   /** Ref to the container element that traps focus */
-  containerRef: RefObject<HTMLElement>;
+  containerRef: RefObject<HTMLElement>
   /** Whether the trap is currently active */
-  isActive: boolean;
+  isActive: boolean
   /** Optional ref to the element that should receive initial focus */
-  initialFocusRef?: RefObject<HTMLElement>;
+  initialFocusRef?: RefObject<HTMLElement>
   /** Whether to return focus to the trigger on deactivation (default: true) */
-  returnFocusOnDeactivate?: boolean;
+  returnFocusOnDeactivate?: boolean
 }
 
-function useFocusTrap(options: UseFocusTrapOptions): void;
+function useFocusTrap(options: UseFocusTrapOptions): void
 ```
 
 **Behavior summary:**
+
 1. When `isActive` becomes `true`: store `document.activeElement`, move focus to `initialFocusRef` (or first focusable), attach Tab/Escape handlers.
 2. While active: cycle Tab within container, close on Escape.
 3. When `isActive` becomes `false`: remove handlers, restore focus to stored element (if `returnFocusOnDeactivate`).
@@ -312,13 +317,13 @@ function useFocusTrap(options: UseFocusTrapOptions): void;
 
 ## 10. WCAG Alignment
 
-| Criterion | Requirement | How this spec satisfies it |
-|---|---|---|
-| 2.1.1 Keyboard | All functionality operable via keyboard | Focus trap ensures keyboard users stay within active overlay |
-| 2.1.2 No Keyboard Trap | Users can leave any component via keyboard | Escape key always closes the overlay and releases the trap |
-| 2.4.3 Focus Order | Focus order preserves meaning and operability | Initial focus is placed on the most logical element per overlay type |
-| 2.4.7 Focus Visible | Focus indicator visible | Covered by existing `:focus-visible` styles in accessibility.md |
-| 4.1.2 Name, Role, Value | Components have correct roles | `role="dialog"`, `aria-modal`, `aria-labelledby` specified per component |
+| Criterion               | Requirement                                   | How this spec satisfies it                                               |
+| ----------------------- | --------------------------------------------- | ------------------------------------------------------------------------ |
+| 2.1.1 Keyboard          | All functionality operable via keyboard       | Focus trap ensures keyboard users stay within active overlay             |
+| 2.1.2 No Keyboard Trap  | Users can leave any component via keyboard    | Escape key always closes the overlay and releases the trap               |
+| 2.4.3 Focus Order       | Focus order preserves meaning and operability | Initial focus is placed on the most logical element per overlay type     |
+| 2.4.7 Focus Visible     | Focus indicator visible                       | Covered by existing `:focus-visible` styles in accessibility.md          |
+| 4.1.2 Name, Role, Value | Components have correct roles                 | `role="dialog"`, `aria-modal`, `aria-labelledby` specified per component |
 
 ---
 
@@ -331,4 +336,4 @@ function useFocusTrap(options: UseFocusTrapOptions): void;
 
 ---
 
-*This is a design-only spec. Implementation will follow in a separate dev issue.*
+_This is a design-only spec. Implementation will follow in a separate dev issue._

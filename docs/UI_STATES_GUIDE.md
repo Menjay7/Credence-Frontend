@@ -30,13 +30,14 @@ Empty states appear when there's no data to display. They should be encouraging 
   title="No bond created yet"
   description="Lock USDC into Credence to build your economic reputation and unlock trust-based opportunities."
   action={{
-    label: "Create your first bond",
-    onClick: () => navigate('/bond')
+    label: 'Create your first bond',
+    onClick: () => navigate('/bond'),
   }}
 />
 ```
 
 **Microcopy Guidelines**:
+
 - Title: 4-6 words, state the fact
 - Description: 1-2 sentences, explain the benefit
 - CTA: Action-oriented verb + outcome
@@ -103,9 +104,9 @@ This section defines the first-run help pattern for the Bond page. The goal is t
   title="No trust score found"
   description="This address hasn't established a trust score yet. Create a bond and gather attestations to build reputation."
   action={{
-    label: "Learn how trust scores work",
+    label: 'Learn how trust scores work',
     onClick: () => window.open('/docs/trust-score', '_blank'),
-    variant: 'secondary'
+    variant: 'secondary',
   }}
 />
 ```
@@ -140,8 +141,8 @@ This section defines the first-run help pattern for the Bond page. The goal is t
   title="No attestations yet"
   description="Attestations from trusted parties strengthen your reputation. Complete transactions and request attestations to build trust."
   action={{
-    label: "Request attestation",
-    onClick: () => navigate('/attestations/request')
+    label: 'Request attestation',
+    onClick: () => navigate('/attestations/request'),
   }}
 />
 ```
@@ -185,8 +186,8 @@ Error states inform users when something goes wrong and help them recover.
 <ErrorState
   type="network"
   action={{
-    label: "Try again",
-    onClick: () => refetch()
+    label: 'Try again',
+    onClick: () => refetch(),
   }}
 />
 ```
@@ -206,8 +207,8 @@ Error states inform users when something goes wrong and help them recover.
   title="Service temporarily unavailable"
   message="We're experiencing technical difficulties. Please try again in a few moments."
   action={{
-    label: "Retry",
-    onClick: () => refetch()
+    label: 'Retry',
+    onClick: () => refetch(),
   }}
 />
 ```
@@ -225,8 +226,8 @@ Error states inform users when something goes wrong and help them recover.
   title="Invalid wallet address"
   message="Please enter a valid Stellar address starting with 'G' and containing 56 characters."
   action={{
-    label: "Go back",
-    onClick: () => reset()
+    label: 'Go back',
+    onClick: () => reset(),
   }}
 />
 ```
@@ -244,8 +245,8 @@ Error states inform users when something goes wrong and help them recover.
   title="Transaction failed"
   message="Your transaction could not be completed. Please check your wallet balance and try again."
   action={{
-    label: "Try again",
-    onClick: () => retryTransaction()
+    label: 'Try again',
+    onClick: () => retryTransaction(),
   }}
 />
 ```
@@ -271,11 +272,9 @@ Loading states provide feedback during asynchronous operations.
 **Usage**:
 
 ```tsx
-{isLoading ? (
-  <LoadingSkeleton variant="form" rows={3} />
-) : (
-  <BondForm />
-)}
+{
+  isLoading ? <LoadingSkeleton variant="form" rows={3} /> : <BondForm />
+}
 ```
 
 ---
@@ -286,11 +285,9 @@ Loading states provide feedback during asynchronous operations.
 **Usage**:
 
 ```tsx
-{isLoading ? (
-  <LoadingSkeleton variant="dashboard" rows={3} />
-) : (
-  <DashboardCards />
-)}
+{
+  isLoading ? <LoadingSkeleton variant="dashboard" rows={3} /> : <DashboardCards />
+}
 ```
 
 ---
@@ -301,11 +298,9 @@ Loading states provide feedback during asynchronous operations.
 **Usage**:
 
 ```tsx
-{isLoading ? (
-  <LoadingSkeleton variant="table" rows={5} />
-) : (
-  <ActivityTable />
-)}
+{
+  isLoading ? <LoadingSkeleton variant="table" rows={5} /> : <ActivityTable />
+}
 ```
 
 ---
@@ -316,11 +311,9 @@ Loading states provide feedback during asynchronous operations.
 **Usage**:
 
 ```tsx
-{isLoading ? (
-  <LoadingSkeleton variant="text" rows={3} />
-) : (
-  <TrustScoreDetails />
-)}
+{
+  isLoading ? <LoadingSkeleton variant="text" rows={3} /> : <TrustScoreDetails />
+}
 ```
 
 ---
@@ -333,14 +326,15 @@ Loading states provide feedback during asynchronous operations.
    - Loading → Error → Empty → Content
 
 2. **Composition Pattern**:
+
 ```tsx
 function MyComponent() {
   const { data, isLoading, error } = useQuery()
-  
+
   if (isLoading) return <LoadingSkeleton variant="card" />
   if (error) return <ErrorState type="network" />
   if (!data || data.length === 0) return <EmptyState {...emptyConfig} />
-  
+
   return <Content data={data} />
 }
 ```
@@ -375,10 +369,12 @@ function MyComponent() {
 ### Examples
 
 ✅ Good:
+
 - "No bonds yet" / "Create your first bond"
 - "Connection lost" / "Check your network and retry"
 
 ❌ Avoid:
+
 - "You haven't created any bonds in the system yet" (too wordy)
 - "Error 500" (too technical)
 - "Oops! Something went wrong!" (overused, not helpful)
@@ -390,16 +386,19 @@ function MyComponent() {
 ### Color Palette
 
 **Empty States**:
+
 - Background: Contextual (blue for bond, purple for trust, etc.)
 - Text: #0f172a (title), #64748b (description)
 
 **Error States**:
+
 - Background: #fef2f2
 - Border: #fee2e2
 - Text: #991b1b (title), #7f1d1d (description)
 - Button: #dc2626
 
 **Loading States**:
+
 - Base: #f1f5f9
 - Shimmer: #e2e8f0
 

@@ -19,7 +19,14 @@ export default function TrustScore() {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
+          marginBottom: '0.5rem',
+        }}
+      >
         <h1 style={{ margin: 0, color: 'var(--text-primary)' }}>Trust Score</h1>
         <Badge variant="gold" label="Gold Tier" className="tier-badge" />
       </div>
@@ -29,8 +36,15 @@ export default function TrustScore() {
       <Banner severity="info">
         Scores update once per epoch. Recent bond changes may not be reflected immediately.
       </Banner>
-      
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginTop: '2rem' }}>
+
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '2rem',
+          marginTop: '2rem',
+        }}
+      >
         <div
           style={{
             padding: '1.5rem',
@@ -41,7 +55,10 @@ export default function TrustScore() {
           }}
         >
           <h2 style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>Lookup Identity</h2>
-          <label htmlFor="wallet-address" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500 }}>
+          <label
+            htmlFor="wallet-address"
+            style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500 }}
+          >
             Identity / Wallet address
           </label>
           <input
@@ -60,12 +77,7 @@ export default function TrustScore() {
               color: 'var(--text-primary)',
             }}
           />
-          <Button
-            type="button"
-            onClick={handleLookup}
-            variant="primary"
-            fullWidth
-          >
+          <Button type="button" onClick={handleLookup} variant="primary" fullWidth>
             Look up score
           </Button>
         </div>
@@ -82,19 +94,22 @@ export default function TrustScore() {
           <h2 style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>Recent Activity</h2>
           <ul style={{ listStyle: 'none', padding: 0 }}>
             {mockActivity.map((item) => (
-              <li 
-                key={item.id} 
-                style={{ 
-                  display: 'flex', 
-                  justifyContent: 'space-between', 
+              <li
+                key={item.id}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
                   alignItems: 'center',
                   padding: '0.75rem 0',
-                  borderBottom: item.id === mockActivity.length ? 'none' : '1px solid var(--border-default)'
+                  borderBottom:
+                    item.id === mockActivity.length ? 'none' : '1px solid var(--border-default)',
                 }}
               >
                 <div>
                   <div style={{ fontWeight: 500 }}>{item.action}</div>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{item.date}</div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+                    {item.date}
+                  </div>
                 </div>
                 <Badge variant={item.status} />
               </li>

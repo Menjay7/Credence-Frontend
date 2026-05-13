@@ -60,10 +60,21 @@ export default function BondForm() {
   }
 
   return (
-    <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault()
+        handleSubmit()
+      }}
+    >
       <input type="number" placeholder="Amount" />
-      
-      <div style={{ display: 'flex', gap: 'var(--credence-space-3)', marginTop: 'var(--credence-space-4)' }}>
+
+      <div
+        style={{
+          display: 'flex',
+          gap: 'var(--credence-space-3)',
+          marginTop: 'var(--credence-space-4)',
+        }}
+      >
         <Button variant="secondary" type="button" onClick={handleCancel}>
           Cancel
         </Button>
@@ -83,12 +94,14 @@ import Button from '../components/Button'
 
 export default function FeatureCard() {
   return (
-    <div style={{
-      padding: 'var(--credence-space-6)',
-      border: '1px solid var(--credence-border-default)',
-      borderRadius: 'var(--credence-radius-lg)',
-      background: 'var(--credence-surface-card)',
-    }}>
+    <div
+      style={{
+        padding: 'var(--credence-space-6)',
+        border: '1px solid var(--credence-border-default)',
+        borderRadius: 'var(--credence-radius-lg)',
+        background: 'var(--credence-surface-card)',
+      }}
+    >
       <h3>Create Your First Bond</h3>
       <p>Lock USDC to build your economic reputation.</p>
       <Button variant="primary" fullWidth onClick={handleGetStarted}>
@@ -138,8 +151,8 @@ export default function Bond() {
         <ErrorState
           type="network"
           action={{
-            label: "Try again",
-            onClick: () => window.location.reload()
+            label: 'Try again',
+            onClick: () => window.location.reload(),
           }}
         />
       </div>
@@ -155,8 +168,8 @@ export default function Bond() {
           title="No bond created yet"
           description="Lock USDC into Credence to build your economic reputation and unlock trust-based opportunities."
           action={{
-            label: "Create your first bond",
-            onClick: () => setHasBond(true)
+            label: 'Create your first bond',
+            onClick: () => setHasBond(true),
           }}
         />
       </div>
@@ -206,7 +219,7 @@ export default function TrustScore() {
 
       // Simulated API call
       const response = await fetch(`/api/trust-score/${address}`)
-      
+
       if (!response.ok) {
         throw new Error('backend_error')
       }
@@ -271,9 +284,7 @@ export default function TrustScore() {
       </div>
 
       {/* States */}
-      {isSearching && (
-        <LoadingSkeleton variant="card" width="24rem" />
-      )}
+      {isSearching && <LoadingSkeleton variant="card" width="24rem" />}
 
       {error === 'validation' && (
         <ErrorState
@@ -281,8 +292,8 @@ export default function TrustScore() {
           title="Invalid wallet address"
           message="Please enter a valid Stellar address starting with 'G' and containing 56 characters."
           action={{
-            label: "Try again",
-            onClick: () => setError(null)
+            label: 'Try again',
+            onClick: () => setError(null),
           }}
         />
       )}
@@ -291,8 +302,8 @@ export default function TrustScore() {
         <ErrorState
           type="backend"
           action={{
-            label: "Retry",
-            onClick: handleLookup
+            label: 'Retry',
+            onClick: handleLookup,
           }}
         />
       )}
@@ -301,8 +312,8 @@ export default function TrustScore() {
         <ErrorState
           type="network"
           action={{
-            label: "Try again",
-            onClick: handleLookup
+            label: 'Try again',
+            onClick: handleLookup,
           }}
         />
       )}
@@ -316,13 +327,15 @@ export default function TrustScore() {
       )}
 
       {scoreData && (
-        <div style={{
-          maxWidth: '24rem',
-          padding: '1.5rem',
-          border: '1px solid #e2e8f0',
-          borderRadius: '12px',
-          background: '#fff',
-        }}>
+        <div
+          style={{
+            maxWidth: '24rem',
+            padding: '1.5rem',
+            border: '1px solid #e2e8f0',
+            borderRadius: '12px',
+            background: '#fff',
+          }}
+        >
           <h3>Trust Score: {scoreData.score}</h3>
           {/* Score details */}
         </div>
@@ -384,22 +397,27 @@ export default function Home() {
       {/* Highlights Section */}
       <section>
         <h2 style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>Your Activity</h2>
-        
+
         {isLoading ? (
           <LoadingSkeleton variant="dashboard" rows={3} />
         ) : highlights && highlights.length > 0 ? (
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '1rem'
-          }}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              gap: '1rem',
+            }}
+          >
             {highlights.map((item: any) => (
-              <div key={item.id} style={{
-                padding: '1.5rem',
-                border: '1px solid #e2e8f0',
-                borderRadius: '12px',
-                background: '#fff'
-              }}>
+              <div
+                key={item.id}
+                style={{
+                  padding: '1.5rem',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '12px',
+                  background: '#fff',
+                }}
+              >
                 {/* Highlight card content */}
               </div>
             ))}
@@ -410,8 +428,8 @@ export default function Home() {
             title="No activity yet"
             description="Your bonds, attestations, and governance participation will appear here."
             action={{
-              label: "Create your first bond",
-              onClick: () => window.location.href = '/bond'
+              label: 'Create your first bond',
+              onClick: () => (window.location.href = '/bond'),
             }}
           />
         )}
@@ -445,7 +463,14 @@ export default function Activity() {
       </p>
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', borderBottom: '1px solid #e2e8f0' }}>
+      <div
+        style={{
+          display: 'flex',
+          gap: '1rem',
+          marginBottom: '2rem',
+          borderBottom: '1px solid #e2e8f0',
+        }}
+      >
         <button
           onClick={() => setActiveTab('disputes')}
           style={{
@@ -508,8 +533,8 @@ export default function Activity() {
               title="No attestations yet"
               description="Attestations from trusted parties strengthen your reputation. Complete transactions and request attestations to build trust."
               action={{
-                label: "Request attestation",
-                onClick: () => console.log('Navigate to attestation request')
+                label: 'Request attestation',
+                onClick: () => console.log('Navigate to attestation request'),
               }}
             />
           )}
@@ -537,9 +562,7 @@ interface AsyncState<T> {
   reset: () => void
 }
 
-export function useAsyncState<T>(
-  asyncFunction: (...args: any[]) => Promise<T>
-): AsyncState<T> {
+export function useAsyncState<T>(asyncFunction: (...args: any[]) => Promise<T>): AsyncState<T> {
   const [data, setData] = useState<T | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -601,12 +624,7 @@ import EmptyState from '../components/states/EmptyState'
 
 describe('EmptyState', () => {
   it('renders title and description', () => {
-    render(
-      <EmptyState
-        title="No data"
-        description="No data available"
-      />
-    )
+    render(<EmptyState title="No data" description="No data available" />)
 
     expect(screen.getByText('No data')).toBeInTheDocument()
     expect(screen.getByText('No data available')).toBeInTheDocument()
@@ -614,21 +632,21 @@ describe('EmptyState', () => {
 
   it('renders action button when provided', () => {
     const handleClick = jest.fn()
-    
+
     render(
       <EmptyState
         title="No data"
         description="No data available"
         action={{
-          label: "Add data",
-          onClick: handleClick
+          label: 'Add data',
+          onClick: handleClick,
         }}
       />
     )
 
     const button = screen.getByRole('button', { name: 'Add data' })
     button.click()
-    
+
     expect(handleClick).toHaveBeenCalledTimes(1)
   })
 })
@@ -649,13 +667,7 @@ describe('ErrorState', () => {
   })
 
   it('renders custom error message', () => {
-    render(
-      <ErrorState
-        type="generic"
-        title="Custom error"
-        message="Custom message"
-      />
-    )
+    render(<ErrorState type="generic" title="Custom error" message="Custom message" />)
 
     expect(screen.getByText('Custom error')).toBeInTheDocument()
     expect(screen.getByText('Custom message')).toBeInTheDocument()
