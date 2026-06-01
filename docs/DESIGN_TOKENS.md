@@ -1,111 +1,106 @@
-# Credence Design Tokens
-
-Credence design tokens are defined in `src/index.css` and use the `--credence-*` prefix.
-
-## Usage Rules
-
-- Prefer `var(--credence-...)` in component CSS and inline styles instead of raw hex values.
-- Reuse the semantic tokens first, especially for surfaces, text, borders, and feedback states.
-- Keep component-specific custom properties mapped back to the shared token set where possible.
-- Preserve the current visual treatment unless a design change is explicitly requested.
-
-## Core Token Groups
-
-### Color
-
-```css
---credence-surface-page
---credence-surface-card
---credence-text-primary
---credence-text-secondary
---credence-border-default
---credence-color-primary
---credence-color-primary-strong
---credence-color-primary-soft
---credence-color-info-*
---credence-color-success-*
---credence-color-warning-*
---credence-color-danger-*
-```
-
-### Spacing
-
-```css
---credence-space-1: 0.25rem;
---credence-space-2: 0.5rem;
---credence-space-3: 0.75rem;
---credence-space-4: 1rem;
---credence-space-5: 1.25rem;
---credence-space-6: 1.5rem;
---credence-space-8: 2rem;
---credence-space-12: 3rem;
-```
-
-### Radius
-
-```css
---credence-radius-sm: 0.25rem;
---credence-radius-md: 0.375rem;
---credence-radius-lg: 0.5rem;
---credence-radius-xl: 0.75rem;
---credence-radius-full: 9999px;
-```
-
-### Typography
-
-```css
---credence-font-family-base
---credence-font-size-xs
---credence-font-size-sm
---credence-font-size-base
---credence-font-size-lg
---credence-font-size-xl
---credence-font-weight-regular
---credence-font-weight-semibold
---credence-font-weight-bold
---credence-line-height-tight
---credence-line-height-base
---credence-line-height-relaxed
-```
-
-### Motion
-
-```css
---credence-motion-duration-instant
---credence-motion-duration-fast
---credence-motion-duration-base
---credence-motion-duration-slow
---credence-motion-easing-standard
---credence-motion-easing-decelerate
---credence-motion-easing-accelerate
---credence-motion-easing-linear
---credence-motion-skeleton
-```
-
-- Use motion tokens for transitions and animation timing across components.
-- Prefer `--credence-motion-duration-fast` for hover/focus micro-interactions.
-- Prefer `--credence-motion-duration-base` for common UI transitions.
-- Respect `prefers-reduced-motion: reduce` by keeping motion subtle or removing non-essential animation.
-
-## Example
-
 ```tsx
-<button
-  style={{
-    padding: 'var(--credence-space-3) var(--credence-space-6)',
-    background: 'var(--credence-color-primary)',
-    color: 'var(--credence-color-white)',
-    borderRadius: 'var(--credence-radius-lg)',
-    fontSize: 'var(--credence-font-size-sm)',
-    fontWeight: 'var(--credence-font-weight-semibold)',
-  }}
->
-  Continue
-</button>
+import React from 'react';
+import { Badge } from './Badge';
+import { ActionCard, ConfirmDialog } from './ActionCard';
+
+const BondDetail = () => {
+  const [activeBond, setActiveBond] = React.useState(null);
+  const [confirmWithdrawFunds, setConfirmWithdrawFunds] = React.useState(false);
+
+  const handleSelectBond = (bond) => {
+    setActiveBond(bond);
+    setConfirmWithdrawFunds(false); // Reset confirm dialog on bond selection
+  };
+
+  const handleExtendLockTerm = () => {
+    console.log('Extend Lock Term clicked');
+    // Extend lock term logic here
+  };
+
+  const handleWithdrawFunds = () => {
+    setConfirmWithdrawFunds(true);
+  };
+
+  const handleTopUpFunds = () => {
+    console.log('Top Up Funds clicked');
+    // Top up funds logic here
+  };
+
+  return (
+    <div>
+      {activeBond && (
+        <>
+          <h2>Bond Details</h2>
+          <p>Amount: ${activeBond.amount}</p>
+          <p>Status: <Badge status={activeBond.status} /></p>
+
+          {/* Lock start/end and time remaining */}
+          <p>
+            Lock Start/End:{' '}
+            {new Date(activeBond.lockStart).toLocaleDateString()} -{' '}
+            {new Date(activeBond.lockEnd).toLocaleTimeString()}
+          </p>
+          <p>Time Remaining: {(new Date(activeBond.lockEnd) -
+              new Date()) / (1000 * 60 * 60 * 24)} days</p>
+
+          {/* Slash penalty % */}
+          <p>Slash Penalty (%): {activeBond.slashPenalty}%</p>
+
+          {/* Inspection of lock end date and time remaining */}
+          <p>
+            Lock End Date: {new Date(activeBond.lockEnd).toLocaleDateString()}
+          </p>
+          <p>
+            Time Remaining Until Lock End:{' '}
+            {(new Date(activeBond.lockEnd) -
+                new Date()) / (1000 * 60 * 60 * 24)} days
+          </p>
+
+          {/* Manage actions */}
+          <ActionCard
+            actionType="extend"
+            label="Extend Lock Term"
+            description="Extend the lock term by 30 days"
+            onClick={handleExtendLockTerm}
+          />
+          <ActionCard
+            actionType="withdraw"
+            label="Withdraw Funds"
+            description="Withdraw funds and close the bond"
+            onClick={handleWithdrawFunds}
+          />
+          <ActionCard
+            actionType="top-up"
+            label="Top Up Funds"
+            description="Deposit additional funds into the bond"
+            onClick={handleTopUpFunds}
+          />
+
+          {/* 30-day lock and slash warning */}
+          <div className="warning">
+            You have{' '}
+            <span className="warning-count">{new Date(
+              activeBond.lockEnd
+            ).getDate()} of {new Date(activeBond.lockEnd).getMonth()+
+                1}/{new Date(activeBond.lockEnd).getFullYear()}</span>
+            left before the lock period expires. If you don't make a 
+          </div>
+
+          {/* Confirm dialog for withdraw funds */}
+          {confirmWithdrawFunds && (
+            <ConfirmDialog
+              title="Confirm Withdrawal"
+              message="Are you sure you want to withdraw your funds?"
+              onConfirm={handleConfirmWithdraw}
+              onCancel={handleCancelWithdraw}
+            />
+          )}
+
+        </>
+      )}
+    </div>
+  );
+};
+
+export default BondDetail;
 ```
-
-## Migration Notes
-
-- Legacy variables such as `--bg-page`, `--text-primary`, and `--color-primary` still resolve through the new token layer for compatibility.
-- New work should use the `--credence-*` names directly.
-- When replacing one-off colors, prefer the closest semantic token instead of adding a new raw hex value.
