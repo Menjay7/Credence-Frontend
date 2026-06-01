@@ -1,17 +1,15 @@
+import { useState } from 'react'
 import Banner from '../components/Banner'
 import Disclaimer from '../components/Disclaimer'
 import { useToast } from '../components/ToastProvider'
 import Badge from '../components/Badge'
 import Button from '../components/Button'
-import TierLadder from '../components/TierLadder'
-import EmptyState from '../components/states/EmptyState'
+import AddressInput from '../components/AddressInput'
 
-export default function TrustScore() {  const { addToast } = useToast()
-
-  // Mock data: current trust score and tier
-  // In production, these would come from wallet/contract data
-  const currentScore = 675
-  const currentTier: TrustTier = 'gold'
+export default function TrustScore() {
+  const { addToast } = useToast()
+  const [address, setAddress] = useState('')
+  const [isAddressValid, setIsAddressValid] = useState(false)
 
   const handleLookup = () => {
     addToast('success', 'Trust score retrieved.')
@@ -34,20 +32,39 @@ export default function TrustScore() {  const { addToast } = useToast()
         Scores update once per epoch. Recent bond changes may not be reflected immediately.
       </Banner>
 
-      <div className="trustScore__grid">
-        <div className="trustScore__card">
-          <h2 className="trustScore__cardTitle">Lookup Identity</h2>
-          <label htmlFor="wallet-address" className="trustScore__label">
-            Identity / Wallet address
-          </label>
-          <input
-            id="wallet-address" className="focus-visible"
-            type="text"
-            placeholder="G..."
-            aria-describedby="trust-desc"
-            className="trustScore__input"
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '2rem',
+          marginTop: '2rem',
+        }}
+      >
+        <div
+          style={{
+            padding: '1.5rem',
+            border: '1px solid var(--border-default)',
+            borderRadius: '12px',
+            background: 'var(--bg-card)',
+            color: 'var(--text-primary)',
+          }}
+        >
+          <h2 style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>Lookup Identity</h2>
+          <AddressInput
+            id="wallet-address"
+            label="Stellar Address"
+            value={address}
+            onChange={setAddress}
+            onValidationChange={setIsAddressValid}
           />
-          <Button type="button" onClick={handleLookup} variant="primary" fullWidth>
+          <Button
+            type="button"
+            onClick={handleLookup}
+            variant="primary"
+            fullWidth
+            disabled={!isAddressValid}
+            style={{ marginTop: '1rem' }}
+          >
             Look up score
           </Button>
         </div>
